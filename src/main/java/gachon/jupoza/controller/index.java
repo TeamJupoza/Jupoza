@@ -9,6 +9,6 @@ public class index {
     @GetMapping("/")
     public String index()
     {
-        return "index.html";
+        return "blank3.html";
     }
 }

@@ -1,0 +1,4 @@
+CategoryleftAlign {
+    display: inline-block; /*이부분에 성질을 inline-block로 바꿔줘서 가로배치를 해줬다.*/
+    vertical-align: top; /*밑에 4px 여백을 없에는것*/
+}
