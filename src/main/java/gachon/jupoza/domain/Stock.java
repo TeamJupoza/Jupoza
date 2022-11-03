@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Stock {
 
     @Id
-    @Column(name = "StockID")
+    @Column(name = "stockid")
     private int stockId;
 
     @Column(name = "Name")
@@ -28,16 +28,16 @@ public class Stock {
 
     private float per;
     private float roe;
-    private float dividend;
-    private float rate;
-    private float net;
-    private float bis;
-    private float current;
-    private float quick;
-    private float debt;
-    private float score;
-    private float sale;
-    private float std;
+    private float dividend;  //매출
+    private float rate;  //연간주식상승률
+    private float net; //순이익 상승률
+    private float bis;  //자기자본비율
+    private float current;  //유동비율
+    private float quick;  //당좌비율
+    private float debt;  //부채비율
+    private float score;  //계산점수
+    private float sale;  //배당률
+    private float std;  //표준편차
 
 
 
