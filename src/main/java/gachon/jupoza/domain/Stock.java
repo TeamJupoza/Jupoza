@@ -1,29 +1,21 @@
 package gachon.jupoza.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 
 @Entity
 @Getter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name = "stock")
 public class Stock {
 
     @Id
     @Column(name = "stockid")
     private int stockId;
-
-    @Column(name = "Name")
     private String name;
-
-    @Column(name = "price")
     private int price;
 
     private float per;
@@ -38,8 +30,32 @@ public class Stock {
     private float score;  //계산점수
     private float sale;  //배당률
     private float std;  //표준편차
+    private String img;
 
 
+    @Builder
+    public Stock (int stockId, String name, int price, float per, float roe, float dividend, float bis, float current, float quick, float debt, float score, float sale, float std, float rate, float net, String img){
+        this.stockId = stockId;
+        this.name = name;
+        this.price = price;
+        this.per = per;
+        this.roe = roe;
+        this.dividend = dividend;
+        this.rate = rate;
+        this.net = net;
+        this.bis = bis;
+        this.current = current;
+        this.quick = quick;
+        this.debt = debt;
+        this.score = score;
+        this.sale = sale;
+        this.std = std;
+        this.img = img;
 
+    }
+
+    public void update(String img){
+        this.img = img;
+    }
 
 }
