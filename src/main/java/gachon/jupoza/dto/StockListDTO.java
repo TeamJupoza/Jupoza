@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class StockListDTO {
-    private Integer no;
+    private Integer stockId;
     private String name;
     private int price;
 
     @Builder
-    public StockListDTO(Integer no, String name, Integer price){
-        this.no = no;
+    public StockListDTO(Integer stockId, String name, Integer price){
+        this.stockId = stockId;
         this.name = name;
         this.price = price;
     }
