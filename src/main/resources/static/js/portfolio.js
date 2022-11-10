@@ -215,12 +215,21 @@ function portfolioWeightCard() {
 function setPortfolioCards() {
     let cards = $('#portfolioCards')
     let label = ['주가 상승률', '순이익 상승률', '매출 상승률', '연간 배당률']
+    let labels = []
+    for (let i = 0; i < 5; i++) {
+        labels.push(ResponseStock[i]['name'])
+    }
+    let dataset0 = []
+    let dataset1 = []
+    let dataset2 = []
+    let dataset3 = []
+    let dataset4 = []
 
-    let dataset0 = getData(dataset0, 0)
-    let dataset1 = getData(dataset1, 1)
-    let dataset2 = getData(dataset2, 2)
-    let dataset3 = getData(dataset3, 3)
-    let dataset4 = getData(dataset4, 4)
+     dataset0 = getData(dataset0, 0)
+     dataset1 = getData(dataset1, 1)
+     dataset2 = getData(dataset2, 2)
+     dataset3 = getData(dataset3, 3)
+     dataset4 = getData(dataset4, 4)
 
         cards.append(`
             <div class="card shadow mb-4">
@@ -234,16 +243,16 @@ function setPortfolioCards() {
             <div class="collapse" id="card${i.toString()}">
                 <div class="card-body">
                 
-                <div id = 'portfoliocard${i}'>
-                    <canvas id = "stockChart${i}"></canvas>
+                <div id = 'portfoliocard'>
+                    <canvas id = "stockChart"></canvas>
                 </div>
 
 
                 </div>
             </div>
         </div>`)
-        ctx = document.getElementById('stockChart' + i)
-        let myBarChart = new Chart(ctx, getConfig2(label, data))
+        ctx = document.getElementById('stockChart')
+        let myBarChart = new Chart(ctx, getConfig2(labels, dataset0,dataset1,dataset2,dataset3,dataset4))
 
 
 }
@@ -336,33 +345,42 @@ function getConfig(title,label, data) {
 
 }
 
-function getConfig2(label, data) {
+function getConfig2(label, dataset0, dataset1, dataset2, dataset3, dataset4) {
     let config = {
         // The type of chart we want to create
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: label,
+            labels: ['주가 상승률', '순이익 상승률', '매출 상승률', '연간 배당률'],
             datasets: [{
-                axis : 'y',
-                label: label,
-                backgroundColor:
-                    [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)',
-                    ],
-                borderColor:
-                    [
-                        'rgb(255, 99, 132,1.5)',
-                        'rgba(54, 162, 235, 1.5)',
-                        'rgba(255, 206, 86, 1.5)',
-                        'rgba(75, 192, 192, 1.5)',
-                        'rgba(153, 102, 255, 1.5)',
-                    ],
-                data: data
+                label: label.pop(0),
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgb(255, 99, 132,1.5)',
+                data: dataset0
+            },
+            {
+                label: label.pop(1),
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1.5)',
+                data: dataset1
+            },
+            {
+                label: label.pop(2),
+                backgroundColor:'rgba(255, 206, 86, 0.5)',
+                borderColor: 'rgba(255, 206, 86, 1.5)',
+                data: dataset2
+            },
+            {
+                label: label.pop(3),
+                backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                borderColor: 'rgba(75, 192, 192, 1.5)',
+                data: dataset3
+            },
+            {
+                label: label.pop(4),
+                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                borderColor: 'rgba(75, 192, 192, 0.5)',
+                data: dataset4
             }]
         },
         // Configuration options go here

@@ -14,11 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 public class portFolioController {
 
     @Autowired
     StockRepository stockRepository;
-    @PostMapping("/portfolio")
+    @PostMapping("/api/portfolio")
     Map<String, Object> portfolio ()
     {
         List<Stock> stocks = new ArrayList<>();
