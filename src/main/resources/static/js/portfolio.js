@@ -430,3 +430,37 @@ function getData(dataset, i) {
 
     return dataset
 }
+
+
+function getBalance(weight, balance)
+{
+    // 포트폴리오 종목들의 balance
+    let balance1 = balance * weight[0] / 100
+    let balance2 = balance * weight[1] / 100
+    let balance3 = balance * weight[2] / 100
+    let balance4 = balance * weight[3] / 100
+    let balance5 = balance * weight[4] / 100
+
+    // 실현손익
+    let sale1 = balance1 * ResponseStock[0]['sale']
+    let sale2 = balance2 * ResponseStock[1]['sale']
+    let sale3 = balance3 * ResponseStock[2]['sale']
+    let sale4 = balance4 * ResponseStock[3]['sale']
+    let sale5 = balance5 * ResponseStock[4]['sale']
+    let sale = sale1 + sale2 + sale3 + sale4 + sale5
+    // 배당 수익
+    let dividend1 = balance1 * ResponseStock[0]['dividend']
+    let dividend2 = balance2 * ResponseStock[1]['dividend']
+    let dividend3 = balance3 * ResponseStock[2]['dividend']
+    let dividend4 = balance4 * ResponseStock[3]['dividend']
+    let dividend5 = balance5 * ResponseStock[4]['dividend']
+    let dividend = dividend1 + dividend2 + dividend3 + dividend4 + dividend5
+    // 총 자산
+
+    let totalBalance = balance + sale + dividend
+
+    let result = {"sale" : sale, "dividend" : dividend,}
+
+
+
+}
