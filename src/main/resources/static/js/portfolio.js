@@ -6,18 +6,22 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 /*
     페이지 로딩시 5개 종목을 서버로 전송해 5개 종목의 정보를 받아오는 함수
  */
+// 요청을 보낼 포트폴리오 종목들
+let RequestStocks
+let ResponseStock
+
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
+    RequestStocks = ["삼성전자", "LG", "포스코케미칼", "현대차", "삼성중공업"]
     loadPortfolio()
 });
 
-// 요청을 보낼 포트폴리오 종목들
-let RequestStocks = ["삼성전자", "SK하이닉스", "CJ제일제당", "LG전자", "효성화학"]
-let ResponseStock
+
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
 function loadPortfolio() {
+    console.log("ResopnseStocks" +RequestStocks)
     $.ajax({
         type: "POST",
         url: "/api/portfolio",
@@ -459,8 +463,13 @@ function getBalance(weight, balance)
 
     let totalBalance = balance + sale + dividend
 
-    let result = {"sale" : sale, "dividend" : dividend,}
+    let result = {"sale" : sale, "dividend" : dividend, 'totalBalance' : totalBalance}
+    return result
 
+}
+
+function setBalance(balance) {
+    let result = getBalance(weight, balance)
 
 
 }
