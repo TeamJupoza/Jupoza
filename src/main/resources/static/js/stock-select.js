@@ -58,9 +58,16 @@ function portfolio(){
 }
 
 
-
-
-
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var categoryName = getParameterByName('category');
+var categoryN = document.getElementById('categoryN');
+categoryN.innerText=categoryName;
+document.write(categoryN.innerText);
 /*stockId.addEventListener('click', function (e){
     e.preventDefault();
     itemsArray.push(stock.value);
