@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StockDTO {
 
+    private int no;
     private int stockId;
     private String name;
     private int price;
@@ -50,7 +51,8 @@ public class StockDTO {
     }*/
 
     @Builder
-    public StockDTO (Stock entity){
+    public StockDTO (int no, Stock entity){
+        this.no = no;
         this.stockId = entity.getStockId();
         this.name = entity.getName();
         this.price = entity.getPrice();

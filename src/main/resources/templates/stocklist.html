@@ -379,6 +379,12 @@
 
             </nav>
             <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800" th:text="${param.authType}"></h1>
             <!-- 주식 카테고리 선택 -->
             <div style="width: 100%; overflow: auto;">
                 <div class="col-xl-3 col-md-6 mb-4 " style=" float: left; width: 20%;">
@@ -402,11 +408,11 @@
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-3 col-md-6 mb-4 " style=" float: left; width: 20%;">
                     <div class="card border-left-success shadow h-100 py-2">
-                        <a class="card-body"th:href="@{/list(category=net)}">
+                        <a class="card-body"th:href="@{/list(category=dividend)}">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Net
+                                        Div
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">성장률</div>
                                 </div>
@@ -492,22 +498,27 @@
 
                 <div th:each="stock : ${list}" class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
-                    <a href="#collapseCardExample"  class="d-block card-header py-3" data-toggle="collapse" role="button"
+                    <a href="#collapseCardExample" th:attrappend="href= ${stock.stockId}" th:classappend="${stock.stockId}"  class="d-block card-header py-3" data-toggle="collapse" role="button"
                        aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 th:text="${stock.name}"class="m-0 font-weight-bold text-primary"></h6>
+                        <h6 th:text="${stock.no}+'. '" style="float:left; color:gray;"></h6>
+                        <h6 th:text="${stock.name}"class="m-0 font-weight-bold text-primary" style="float:left;"></h6>
                         <span id ="money" th:text="${#numbers.formatInteger(stock.price, 3, 'COMMA')}" style="float:right; font-size:15px; color:black;"></span>
 
                     </a>
                     <!-- Card Content - Collapse -->
-                    <div class="collapse show" id="collapseCardExample" style="">
+                    <div class="collapse show" id="collapseCardExample" th:attrappend="id= ${stock.stockId}" style="">
                         <form id="selectStock">
                         <div class="card-body">
+                            <div th:text="${stock.stockId}"></div>
                             <div th:text="${stock.name}"></div>
                             <!--정보-->
                             <div>
+                            </div>
+                            <img th:src="${stock.img}"></img>
                             <div>
-                            <span th:text="${stock.per}"></span>
-                                <span th:text="${stock.roe}"></span>
+                            <div>
+                            PER <span th:text="${stock.per}"></span>
+                                ROE <span th:text="${stock.roe}"></span>
                                 매출 <span th:text="${stock.dividend}"></span>
                                 순이익상승률 <span th:text="${stock.net}"></span>
                                 연간주식상승률 <span th:text="${stock.rate}"></span>
@@ -522,13 +533,11 @@
                             배당률 <span th:text="${stock.sale}"></span>
                             표준편차 <span th:text="${stock.std}"></span>
                                 <!--정보끝-->
-                            </div>
-                            <img th:src="${stock.img}"></img>
-                            <div>
                             <button type = "button" onclick="button_click(this.id, this.value)" class="btn btn-primary" name="stock" th:id="${stock.stockId}" th:value="${stock.name}" style="float:right;">담기</button>
                             </div>
                         </div></form>
                 </div>
+
 
             </div>
             <!-- End of Main Content -->
@@ -537,19 +546,20 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">장바구니</h6>
                     </div>
-                    <form action="/portfolio/stock" method="get">
+                    <!--<form action="/portfolio/stock" method="post">-->
                     <!-- <form th:action="@{}" th:object="${}" method="post"> -->
                     <div class="card-body" >
                         <div id="selectedStock">
                         </div>
                         <div>
 
-                            <button type="submit" value = "전송" class="btn btn-success btn-circle">
+                            <button type="submit" value = "전송" class="btn btn-primary" onclick="portfolio()">
                                 <!--<i class="fas fa-check"></i>-->
                             </button>
                         </div>
-                    </div></form>
-
+                    </div>
+                    <!--</form>-->
+                </div>
                 </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
