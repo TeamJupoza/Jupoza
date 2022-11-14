@@ -20,7 +20,7 @@ public class Stock {
 
     private float per;
     private float roe;
-    private float dividend;  //매출
+    private float dividend;  //배당률
     private float rate;  //연간주식상승률
     private float net; //순이익 상승률
     private float bis;  //자기자본비율
@@ -28,7 +28,7 @@ public class Stock {
     private float quick;  //당좌비율
     private float debt;  //부채비율
     private float score;  //계산점수
-    private float sale;  //배당률
+    private float sale;  //매출
     private float std;  //표준편차
     private String img;
 
