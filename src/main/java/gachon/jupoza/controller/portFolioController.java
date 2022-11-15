@@ -30,7 +30,7 @@ public class portFolioController {
         // 요청된 주식목록
         List<String> requestStocks = new ArrayList<>();
         requestStocks = (List<String>) request.get("RequestStock");
-        log.info("reqeust_stocks : {}",requestStocks);
+
         // DB에서 주식 데이터 가져오기
         List<StockDTO> stocks = portFolioService.getStocks(requestStocks);
 
@@ -41,13 +41,15 @@ public class portFolioController {
         // 종목들의 Weight 요청하기
         List<Object> weights = new ArrayList<>();
         weights = portFolioService.getWeight(weightRequest);
-        log.info("weights {}", weights);
 
+
+        // response
         Map<String, Object> result = new HashMap<>();
         result.put("stocks", stocks);
         result.put("weights",weights);
         result.put("result", "success");
-        System.out.println(result);
+
+
         return result;
     }
 

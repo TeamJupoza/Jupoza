@@ -9,19 +9,29 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 // 요청을 보낼 포트폴리오 종목들
 let RequestStocks
 let ResponseStock
+let ResponseWeight
 
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
     RequestStocks = ["삼성전자", "LG", "포스코케미칼", "현대차", "삼성중공업"]
+    $("#outputBalanceCard").css("display","none")
     loadPortfolio()
+
 });
 
+$('#balanceBtn').click(function () {
+    setBalance(Number($("#inputBalance").val()))
+    $("#InputBalanceCard").css("display","none")
+    $("#outputBalanceCard").css("display","block")
+
+
+})
 
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
 function loadPortfolio() {
-    console.log("ResopnseStocks" +RequestStocks)
+    console.log("ResopnseStocks" + RequestStocks)
     $.ajax({
         type: "POST",
         url: "/api/portfolio",
@@ -34,6 +44,7 @@ function loadPortfolio() {
                 console.log("hello")
                 console.log(response)
                 ResponseStock = response.stocks
+                ResponseWeight = response.weights
                 setPortfolio(ResponseStock)
             }
 
@@ -57,7 +68,7 @@ function setPieChart() {
     var ctx = document.getElementById("myPieChart");
 
     let label = []
-    let data = [20, 10, 15, 30, 20]
+    let data = ResponseWeight
 
     for (i = 0; i < 5; i++) {
         label.push(ResponseStock[i]['name'])
@@ -115,10 +126,8 @@ function setPieChart() {
 }
 
 function portfolioWeightCard() {
-    //let card = document.getElementById('portfolioWeightCard')
+
     let card = $('#portfolioWeightCard')
-
-
     //1
     card.append(`
                         <div style="width: 100%; overflow: auto;" id = 'portfolioWeightCard'>
@@ -130,7 +139,7 @@ function portfolioWeightCard() {
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     ${ResponseStock[0]['name']}
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">20%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[0]}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -148,7 +157,7 @@ function portfolioWeightCard() {
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     ${ResponseStock[1]['name']}
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">10%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[1]}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -165,7 +174,7 @@ function portfolioWeightCard() {
                                                 <div class="text-info text-xs font-weight-bold  text-uppercase mb-1">
                                                     ${ResponseStock[2]['name']}
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">15%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[2]}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -183,7 +192,7 @@ function portfolioWeightCard() {
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     ${ResponseStock[3]['name']}
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">30%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[3]}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -201,7 +210,7 @@ function portfolioWeightCard() {
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     ${ResponseStock[4]['name']}
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">20%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[4]}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -229,34 +238,27 @@ function setPortfolioCards() {
     let dataset3 = []
     let dataset4 = []
 
-     dataset0 = getData(dataset0, 0)
-     dataset1 = getData(dataset1, 1)
-     dataset2 = getData(dataset2, 2)
-     dataset3 = getData(dataset3, 3)
-     dataset4 = getData(dataset4, 4)
+    dataset0 = getData(dataset0, 0)
+    dataset1 = getData(dataset1, 1)
+    dataset2 = getData(dataset2, 2)
+    dataset3 = getData(dataset3, 3)
+    dataset4 = getData(dataset4, 4)
 
-        cards.append(`
-            <div class="card shadow mb-4">
-            <!-- Card Header - Accordion -->
-            <a href="#card${i.toString()}" class="d-block card-header py-3" data-toggle="collapse"
-               role="button"
-               aria-expanded="true" aria-controls="card${i.toString()}">
-                <h6 class="m-0 font-weight-bold text-primary">${ResponseStock[i]['name']}</h6>
-            </a>
-            <!-- Card Content - Collapse -->
-            <div class="collapse" id="card${i.toString()}">
+
+    cards.append(`
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                    </div>
                 <div class="card-body">
-                
-                <div id = 'portfoliocard'>
-                    <canvas id = "stockChart"></canvas>
-                </div>
-
-
-                </div>
-            </div>
-        </div>`)
-        ctx = document.getElementById('stockChart')
-        let myBarChart = new Chart(ctx, getConfig2(labels, dataset0,dataset1,dataset2,dataset3,dataset4))
+                    <div id = 'portfoliocard'>
+                        <canvas id = "stockChart"></canvas>
+                    </div>
+                    </div>
+                </div>   
+    `)
+    ctx = document.getElementById('stockChart')
+    let myBarChart = new Chart(ctx, getConfig2(labels, dataset0, dataset1, dataset2, dataset3, dataset4))
 
 
 }
@@ -276,20 +278,18 @@ function setWeightChart() {
     }
 
 
-
-
     let ctx = document.getElementById("myBarChart");
     let ctx2 = document.getElementById("myBarChart2");
     let ctx3 = document.getElementById("myBarChart3");
     let ctx4 = document.getElementById("myBarChart4");
     let myBarChart = new Chart(ctx, getConfig('포트폴리오 연간 주가 상승률', label, rate))
-    let myBarChart2 = new Chart(ctx2, getConfig('포트폴리오 연간 순이익 상승률',label, net))
-    let myBarChart3 = new Chart(ctx3, getConfig('포트폴리오 연간 매출 상승률',label, sale))
+    let myBarChart2 = new Chart(ctx2, getConfig('포트폴리오 연간 순이익 상승률', label, net))
+    let myBarChart3 = new Chart(ctx3, getConfig('포트폴리오 연간 매출 상승률', label, sale))
     let myBarChart4 = new Chart(ctx4, getConfig('포트폴리오 연간 배당율', label, dividend))
 
 }
 
-function getConfig(title,label, data) {
+function getConfig(title, label, data) {
     let config = {
         // The type of chart we want to create
         type: 'bar',
@@ -341,7 +341,7 @@ function getConfig(title,label, data) {
                     }
                 }]
             },
-            plugins: { labels: { render: 'value' } }
+            plugins: {labels: {render: 'value'}}
 
         }
     }
@@ -362,30 +362,30 @@ function getConfig2(label, dataset0, dataset1, dataset2, dataset3, dataset4) {
                 borderColor: 'rgb(255, 99, 132,1.5)',
                 data: dataset0
             },
-            {
-                label: label.pop(1),
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1.5)',
-                data: dataset1
-            },
-            {
-                label: label.pop(2),
-                backgroundColor:'rgba(255, 206, 86, 0.5)',
-                borderColor: 'rgba(255, 206, 86, 1.5)',
-                data: dataset2
-            },
-            {
-                label: label.pop(3),
-                backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                borderColor: 'rgba(75, 192, 192, 1.5)',
-                data: dataset3
-            },
-            {
-                label: label.pop(4),
-                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                borderColor: 'rgba(75, 192, 192, 0.5)',
-                data: dataset4
-            }]
+                {
+                    label: label.pop(1),
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1.5)',
+                    data: dataset1
+                },
+                {
+                    label: label.pop(2),
+                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
+                    borderColor: 'rgba(255, 206, 86, 1.5)',
+                    data: dataset2
+                },
+                {
+                    label: label.pop(3),
+                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1.5)',
+                    data: dataset3
+                },
+                {
+                    label: label.pop(4),
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 0.5)',
+                    data: dataset4
+                }]
         },
         // Configuration options go here
         options: {
@@ -418,7 +418,7 @@ function getConfig2(label, dataset0, dataset1, dataset2, dataset3, dataset4) {
                     }
                 }]
             },
-            plugins: { labels: { render: 'value' } }
+            plugins: {labels: {render: 'value'}}
 
         }
     }
@@ -436,8 +436,7 @@ function getData(dataset, i) {
 }
 
 
-function getBalance(weight, balance)
-{
+function getBalance(weight, balance) {
     // 포트폴리오 종목들의 balance
     let balance1 = balance * weight[0] / 100
     let balance2 = balance * weight[1] / 100
@@ -445,31 +444,36 @@ function getBalance(weight, balance)
     let balance4 = balance * weight[3] / 100
     let balance5 = balance * weight[4] / 100
 
+
     // 실현손익
-    let sale1 = balance1 * ResponseStock[0]['sale']
-    let sale2 = balance2 * ResponseStock[1]['sale']
-    let sale3 = balance3 * ResponseStock[2]['sale']
-    let sale4 = balance4 * ResponseStock[3]['sale']
-    let sale5 = balance5 * ResponseStock[4]['sale']
+    let sale1 = balance1 * ResponseStock[0]['sale'] / 100
+    let sale2 = balance2 * ResponseStock[1]['sale'] / 100
+    let sale3 = balance3 * ResponseStock[2]['sale'] / 100
+    let sale4 = balance4 * ResponseStock[3]['sale']/ 100
+    let sale5 = balance5 * ResponseStock[4]['sale']/ 100
     let sale = sale1 + sale2 + sale3 + sale4 + sale5
+
     // 배당 수익
-    let dividend1 = balance1 * ResponseStock[0]['dividend']
-    let dividend2 = balance2 * ResponseStock[1]['dividend']
-    let dividend3 = balance3 * ResponseStock[2]['dividend']
-    let dividend4 = balance4 * ResponseStock[3]['dividend']
-    let dividend5 = balance5 * ResponseStock[4]['dividend']
+    let dividend1 = balance1 * ResponseStock[0]['dividend'] / 100
+    let dividend2 = balance2 * ResponseStock[1]['dividend'] / 100
+    let dividend3 = balance3 * ResponseStock[2]['dividend'] / 100
+    let dividend4 = balance4 * ResponseStock[3]['dividend'] / 100
+    let dividend5 = balance5 * ResponseStock[4]['dividend'] / 100
     let dividend = dividend1 + dividend2 + dividend3 + dividend4 + dividend5
+
     // 총 자산
 
     let totalBalance = balance + sale + dividend
 
-    let result = {"sale" : sale, "dividend" : dividend, 'totalBalance' : totalBalance}
+    let result = {"sale": sale, "dividend": dividend, 'totalBalance': totalBalance}
+    console.log(result)
     return result
 
 }
 
 function setBalance(balance) {
-    let result = getBalance(weight, balance)
-
-
+    let result = getBalance(ResponseWeight,balance)
+    $("#outputSale").text(Math.round(result.sale) + "만원")
+    $("#outputDividend").text(Math.round(result.dividend) + "만원")
+    $("#outputTotalBalance").text(Math.round(result.totalBalance) + "만원")
 }

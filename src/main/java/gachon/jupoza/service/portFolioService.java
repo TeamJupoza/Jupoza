@@ -43,14 +43,14 @@ public class portFolioService {
         {
             stocks.add(request.get(i));
         }
-        System.out.println("stocks" +stocks);
+
 
         // DB에서 요청된 주식 정보 가져오가
         List<Stock> StockEntityList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             StockEntityList.add(stockRepository.findByname(stocks.get(i)));
         }
-        System.out.println("StockEntityList : " + StockEntityList);
+
 
         List<StockDTO> stockList = new ArrayList<>();
         for (Stock stock : StockEntityList) {
@@ -75,7 +75,7 @@ public class portFolioService {
                 .build()
                 .expand(request)
                 .toUri();
-        log.info("uri : {}", uri);
+//        log.info("uri : {}", uri);
 
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -84,8 +84,8 @@ public class portFolioService {
 
         RestTemplate rt = new RestTemplate();
         ResponseEntity<HashMap> responseEntity = rt.exchange(uri, HttpMethod.POST, httpEntity, HashMap.class);
-        responseEntity.getHeaders().forEach((k, v) -> System.out.println(k + " " + v));
-        responseEntity.getBody().forEach((k, v) -> System.out.println(k + " " + v));
+//        responseEntity.getHeaders().forEach((k, v) -> System.out.println(k + " " + v));
+//        responseEntity.getBody().forEach((k, v) -> System.out.println(k + " " + v));
 
         List<Object> result = new ArrayList<>();
         result = (List<Object>) responseEntity.getBody().get("weightResponse");
