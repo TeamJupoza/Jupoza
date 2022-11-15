@@ -24,11 +24,14 @@ public class StockService {
         List<Stock> stocks = stockRepository.findAll(Sort.by(Sort.Direction.DESC, category));
         List<StockDTO> stockList = new ArrayList<>();
 
+        int i=1;
         for(Stock stock : stocks){
             StockDTO stockDTO = StockDTO.builder()
+                    .no(i)
                     .entity(stock)
                     .build();
             stockList.add(stockDTO);
+            i++;
         }
         return stockList;
     }

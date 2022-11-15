@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class StockController {
@@ -26,11 +28,10 @@ public class StockController {
 
 
     @PostMapping("portfolio/stock")
-    public String portfolioStock(PortfolioDTO form){
+    public String portfolioStock(@RequestBody List<Map<String,Object>> form){
 
-        System.out.println(form.getStockId1());
-        System.out.println(form.getStockId2());
-        return "blank3";
+        System.out.println(form);
+        return "blank3.html";
     }
 
 

@@ -1,11 +1,11 @@
 const form = document.querySelector('form');
 const button = document.querySelector('button');
-//const stockId = document.getElementById('selectStock');
 const selected = document.getElementById('selectedStock');
-//const stock = document.getElementsByName('stock');
-let itemsArray = localStorage.getItem('items')?JSON.parse(localStorage.getItem('items')): [];
+const N = 5;
+/** 로컬스토리지가 있는지 확인하고 생성**/
+let itemsArray = localStorage.getItem('items')?JSON.parse(localStorage.getItem('items')): Array.apply(null, new Array(5)).map(Number.prototype.valueOf,0);
 
-localStorage.setItem('items', JSON.stringify(itemsArray));
+localStorage.setItem('items', JSON.stringify(itemsArray)); //아이템이라는 로컬스토리지에
 const data = JSON.parse(localStorage.getItem('items'));
 
 const buttonMaker = (stock) => {
@@ -39,10 +39,35 @@ data.forEach(item => {
     buttonMaker(item);
 });
 
+function portfolio(){
+    $.ajax({
+        url: "portfolio",
+        type: "POST",
+        dataType: "json",
+        processData: true,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(itemsArray),
+        success: function(data) {
+            if (data == 1) {
+                alert("등록 성공");
+            } else {
+                alert("등록 실패!");
+            }
+        }
+    });
+}
 
 
-
-
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var categoryName = getParameterByName('category');
+var categoryN = document.getElementById('categoryN');
+categoryN.innerText=categoryName;
+document.write(categoryN.innerText);
 /*stockId.addEventListener('click', function (e){
     e.preventDefault();
     itemsArray.push(stock.value);
