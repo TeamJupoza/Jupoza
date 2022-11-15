@@ -3,18 +3,25 @@ src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 // 쿠키 사용을 위한 Jquery-cookie 임포트
 src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
 
-/*
-    페이지 로딩시 5개 종목을 서버로 전송해 5개 종목의 정보를 받아오는 함수
- */
 // 요청을 보낼 포트폴리오 종목들
-let RequestStocks
+let RequestStocks = []
 let ResponseStock
 let ResponseWeight
 
 
+
+
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
-    RequestStocks = ["삼성전자", "LG", "포스코케미칼", "현대차", "삼성중공업"]
+    //RequestStocks = ["삼성전자", "LG", "포스코케미칼", "현대차", "삼성중공업"]
+    // 로컬스토리지에서 포트폴리오 변수들을 가져옴
+    let storage = []
+    storage = JSON.parse(localStorage.getItem('items'))
+    console.log(typeof storage)
+    for (let i = 5 ; i < 10; i++) {
+        RequestStocks.push(storage[i]['name'])
+    }
+    console.log(RequestStocks)
     $("#outputBalanceCard").css("display","none")
     loadPortfolio()
 

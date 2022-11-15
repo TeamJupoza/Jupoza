@@ -42,12 +42,14 @@ data.forEach(item => {
 function portfolio(){
     $.ajax({
         url: "portfolio",
-        type: "POST",
-        dataType: "json",
+        type: "GET",
+        //dataType: "json",
         processData: true,
         contentType: "application/json; charset=UTF-8",
-        data: JSON.stringify(itemsArray),
+        //data: JSON.stringify(itemsArray),
         success: function(data) {
+            console.log("성공")
+            location.replace("/portfolio")
             if (data == 1) {
                 alert("등록 성공");
             } else {
