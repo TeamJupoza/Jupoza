@@ -148,9 +148,7 @@ function portfolioWeightCard() {
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[0]}</div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
+           
                                         </div>
                                     </div>
                                 </div>
@@ -166,9 +164,7 @@ function portfolioWeightCard() {
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[1]}</div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -183,9 +179,7 @@ function portfolioWeightCard() {
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[2]}</div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
+  
                                         </div>
                                     </div>
                                 </div>
@@ -201,9 +195,7 @@ function portfolioWeightCard() {
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[3]}</div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -219,9 +211,7 @@ function portfolioWeightCard() {
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">${ResponseWeight[4]}</div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
