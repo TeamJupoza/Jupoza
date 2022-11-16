@@ -16,7 +16,7 @@ $(document).ready(function () {
 $('#indexImgClick').click(function () {
     if (indexImgCount == 6)
     {
-        location.replace("/list")
+        location.replace("/category")
     }
     else
     {
