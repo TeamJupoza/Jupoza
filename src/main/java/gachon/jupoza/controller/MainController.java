@@ -40,6 +40,11 @@ public class MainController {
     {
         return "blank3.html";
     }
+    @GetMapping("/category")
+    public String category()
+    {
+        return "category.html";
+    }
 
 
 
