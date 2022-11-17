@@ -352,7 +352,7 @@ function getConfig2(label, dataset0, dataset1, dataset2, dataset3, dataset4) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ['주가 상승률', '순이익 상승률', '매출 상승률', '연간 배당률'],
+            labels: ['주가 상승률', '매출 상승률','순이익 상승률', '연간 배당률'],
             datasets: [{
                 label: label.pop(0),
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
