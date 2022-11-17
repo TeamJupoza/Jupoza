@@ -42,7 +42,7 @@ public class StockController {
      * **/
     @GetMapping("/list")
     public String stockByCategory(@RequestParam(required = true, defaultValue = "per") String category, Model model) throws IOException {
-        model.addAttribute("list", stockService.stockByPer(category));
+        model.addAttribute("list", stockService.stockByOrder(category));
 
         return "stocklist";
     }
