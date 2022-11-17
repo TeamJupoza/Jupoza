@@ -226,7 +226,7 @@ function setPortfolioCards() {
     let cards = $('#portfolioCards')
     let label = ['주가 상승률', '순이익 상승률', '매출 상승률', '연간 배당률']
     let labels = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 4; i >= 0; i--) {
         labels.push(ResponseStock[i]['name'])
     }
     let dataset0 = []
@@ -255,7 +255,7 @@ function setPortfolioCards() {
                 </div>   
     `)
     ctx = document.getElementById('stockChart')
-    let myBarChart = new Chart(ctx, getConfig2(labels, dataset0, dataset1, dataset2, dataset3, dataset4))
+    let myBarChart = new Chart(ctx, getConfig2(labels, dataset0 , dataset1, dataset2, dataset3, dataset4))
 
 
 }
