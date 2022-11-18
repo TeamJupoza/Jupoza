@@ -111,4 +111,9 @@ create table stock
 ```
 
 
+# 관련 링크
 
+1. Jupoza_Python(플라스크 서버)
+   - https://github.com/devMs94/Jupoza_python
+2. Jupoza_App
+   - https://github.com/kkkmj/jupoja
