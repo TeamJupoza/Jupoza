@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ## application.property
-*.yml
+/src/main/resources/application.yml
