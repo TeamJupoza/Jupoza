@@ -117,3 +117,12 @@ create table stock
    - https://github.com/devMs94/Jupoza_python
 2. Jupoza_App
    - https://github.com/kkkmj/jupoja
+
+
+# Team
+가천대학교 컴퓨터공학과 
+- 유민상 : 웹사이트 개발 
+- 김민조 : 웹사이트 개발  앱 개발 
+- 김종구 : 데이터 전처리 
+- 황윤기 : 데이터 전처리 
+- 최범수 : 파이썬 서버 개발 , 데이터 전처리
