@@ -88,7 +88,10 @@ create table stock
     img      text                     null
 );
 ```
-### 3. document 폴더의 stock.sql 파일의 쿼리를 실행
+### 3. 데이터 전러치  
+* document 폴더의 JupozaDataPreProcessing.ipynb 프로그램을 이용해 재무주가 데이터를 전처리
+* 전처리된 데이터를 stock 테이블에 삽입 
+* sampleStock.sql 참조(2022.11월 기준 샘플자료)
 
 ### 4. Gradle Build
 ```sh
