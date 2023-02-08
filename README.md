@@ -61,7 +61,7 @@ spring:
 
 #### 1. Jupoza Database 생성
 ```sh
-CREATE DATABASE letmesub;
+CREATE DATABASE jupoza;
 ```
 #### 2. Jupoza Table 생성
 
