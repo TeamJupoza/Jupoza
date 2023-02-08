@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>주식 조회</title>
+
+    <!-- Custom fonts for this template-->
+    <script src="https://kit.fontawesome.com/da56c3de8c.js" crossorigin="anonymous"></script>
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+    <style type="text/css">
+        a { text-decoration:none }
+    </style>
+
+</head>
+
+
+
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+
+           href="/category">
+
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">JUPOJA</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+
+            <a class="nav-link" href="/category">
+
+            
+
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Main</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Stock
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Category</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Stock Category:</h6>
+                    <a class="collapse-item"
+                       href="list?category=per">저평가</a>
+                    <a class="collapse-item"
+                       href="list?category=net">성장률</a>
+                    <a class="collapse-item"
+                       href="list?category=dividend">배당금</a>
+                    <a class="collapse-item"
+                       href="list?category=score">안정성</a>
+                    <a class="collapse-item"
+                       href="list?category=std">고위험</a>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Result
+        </div>
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="portfolio">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Portfolio</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" >
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
+                <div class="eight" >
+                    <h1>Stock Portfolio Advisory</h1>
+                </div>
+
+
+
+
+                <!--  Topbar Search
+
+                     <div class="input-group" >
+                     <p style="background: linear-gradient(to right, #A7A3FF,#FFA7A3, #671cc4, #5673bd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">주식 포트폴리오 자문</p>
+
+                     </div>-->
+
+
+
+
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800" id="categoryN"></h1>
+                <!-- Page Heading -->
+            <!-- 주식 카테고리 선택 -->
+            <div style="width: 100%; overflow: auto;">
+                <div class="col-xl-3 col-md-6 mb-4 " style=" float: left; width: 20%;">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <a class="card-body" th:href="@{/list(category=per)}">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        PER
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">저평가</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6 mb-4 " style=" float: left; width: 20%;">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <a class="card-body"th:href="@{/list(category=net)}">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Net
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">성장률</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pending Requests Card Example -->
+                <div class="col-xl-3 col-md-6 mb-4 " style="float: left; width: 20%;">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <a class="card-body"th:href="@{/list(category=dividend)}">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Div
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">배당금</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pending Requests Card Example -->
+                <div class="col-xl-3 col-md-6 mb-4 " style="float: left; width: 20%;">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <a class="card-body"th:href="@{/list(category=score)}">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Safety
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">안정성</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4 " style="float: left; width: 20%;">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <a class="card-body" th:href="@{/list(category=std)}">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        High Risk
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">고위험</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- 주식 카테고리 선택 끝 -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+
+
+                <!-- Earnings (Monthly) Card Example -->
+
+
+
+                <!-- /.container-fluid -->
+
+
+                <div th:each="stock : ${list}" class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" th:attrappend="href= ${stock.stockId}" th:classappend="${stock.stockId}"  class="d-block card-header py-3" data-toggle="collapse" role="button"
+                       aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 th:text="${stock.no}+'. '" style="float:left; color:gray;"></h6>
+                        <h6 th:text="${stock.name}"class="m-0 font-weight-bold text-primary" style="float:left;"></h6>
+                        <span id ="money" th:text="${#numbers.formatInteger(stock.price, 3, 'COMMA')}" style="float:right; font-size:15px; color:black;"></span>
+
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse " id="collapseCardExample" th:attrappend="id= ${stock.stockId}" style="">
+                        <form id="selectStock">
+                        <div class="card-body">
+                            <div>
+                                <div style="float:left;">
+                                <div>
+
+                            <div class="text-xs" th:text="${stock.stockId}"></div>
+                            <div th:text="${stock.name}" class="stockName" style="color: black; font-weight: bold;"  ></div>
+                            <!--정보-->
+                                </div>
+
+                                    <img align="left" th:src="${stock.img}"></img></div>
+
+
+                                <div style="text-align: center;">
+
+                                <table class="type10" align="left" style="margin-left: 20px;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="cols">지표</th>
+                                        <th scope="cols">값</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">PER</th>
+                                        <td th:text="${stock.per}" class="per"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="even">ROE</th>
+                                        <td th:text="${stock.roe}" class="even"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">매출</th>
+                                        <td th:text="${stock.sale}" class="per"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="even">순이익상승률</th>
+                                        <td th:text="${stock.net}" class="even"></td>
+                                    </tr><tr>
+                                        <th scope="row">연간주식상승률</th>
+                                        <td th:text="${stock.rate}" class="per"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">배당률</th>
+                                        <td th:text="${stock.dividend}" class="per"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="even">표준편차</th>
+                                        <td th:text="${stock.std}" class="even"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                    <table class="type10" align="left">
+                                        <thead>
+                                        <tr>
+                                            <th scope="cols">지표</th>
+                                            <th scope="cols">값</th>
+                                        </tr>
+                                        </thead>
+                                    <tr>
+                                        <th scope="row" class="even">자기자본비율</th>
+                                        <td th:text="${stock.bis}" class="even"></td>
+                                    </tr><tr>
+                                    <th scope="row">유동비율</th>
+                                    <td th:text="${stock.current}" class="per"></td>
+                                </tr>
+                                    <tr>
+                                        <th scope="row" class="even">당좌비율</th>
+                                        <td th:text="${stock.quick}" class="even"></td>
+                                    </tr><tr>
+                                    <th scope="row">부채비율</th>
+                                    <td th:text="${stock.debt}" class="per"></td>
+                                </tr>
+                                    <tr>
+                                        <th scope="row" class="even">계산점수</th>
+                                        <td th:text="${stock.score}" class="even"></td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+
+                                </div>
+                                </div>
+                                <button type = "button" onclick="button_click(this.id, this.value)" class="btn btn-primary" name="stock"
+                                        th:id="${stock.stockId}" th:value="${stock.name}" style="position: absolute; float:right; right: 10px; bottom: 10px;">담기</button>
+
+
+                        </div>
+                        </form>
+                </div>
+
+
+            </div>
+            <!-- End of Main Content -->
+                <!-- 장바구니 구현 -->
+                <div class="card shadow mb-4" style="position: fixed; bottom:0;">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">장바구니</h6>
+                        <span> 5종목만 넣어주세요.</span>
+                    </div>
+                    <!--<form action="/portfolio/stock" method="post">-->
+                    <!-- <form th:action="@{}" th:object="${}" method="post"> -->
+                    <div class="card-body" >
+                        <div id="selectedStock">
+                        </div>
+                        <div>
+
+                            <div></div>
+                            <button type="submit" value = "전송" class="btn btn-info btn-icon-split" onclick="portfolio()">
+                                <span class="text"> 전송 </span>
+                                <!--<i class="fas fa-check"></i>-->
+                            </button>
+                        </div>
+                    </div>
+                    <!--</form>-->
+                </div>
+                </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Gachon Team JUPOZA</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary"
+                       href="../../../../../../Downloads/startbootstrap-sb-admin-2-gh-pages%202/login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+        <script src="/js/stock-select.js"></script>
+
+        <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/js/demo/chart-radar-demo.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+</body>
+
+</html>
