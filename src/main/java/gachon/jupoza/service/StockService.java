@@ -1,7 +1,7 @@
 package gachon.jupoza.service;
 
 import gachon.jupoza.domain.Stock;
-import gachon.jupoza.domain.StockRepository;
+import gachon.jupoza.repository.StockRepository;
 import gachon.jupoza.dto.StockDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

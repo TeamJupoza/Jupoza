@@ -28,28 +28,6 @@ public class StockDTO {
     private String img;
 
 
-
-/*    public Stock toEntity(){
-        Stock build = Stock.builder()
-                .stockId(stockId)
-                .price(price)
-                .name(name)
-                .per(per)
-                .roe(roe)
-                .dividend(dividend)
-                .rate(rate)
-                .net(net)
-                .bis(bis)
-                .current(current)
-                .quick(quick)
-                .debt(debt)
-                .score(score)
-                .sale(sale)
-                .std(std)
-                .build();
-        return build;
-    }*/
-
     @Builder
     public StockDTO (int no, Stock entity){
         this.no = no;
@@ -70,23 +48,5 @@ public class StockDTO {
         this.std = entity.getStd();
         this.img = entity.getImg();
     }
-/*    @Builder
-    public StockDTO (Integer stockId, String name, Integer price, float per, float roe, float dividend, float bis, float current, float quick, float debt, float score, float sale, float std, float rate, float net, String chart){
-        this.stockId = stockId;
-        this.name = name;
-        this.price = price;
-        this.per = per;
-        this.roe = roe;
-        this.dividend = dividend;
-        this.rate = rate;
-        this.net = net;
-        this.bis = bis;
-        this.current = current;
-        this.quick = quick;
-        this.debt = debt;
-        this.score = score;
-        this.sale = sale;
-        this.std = std;
-        this.chart = chart;
-    }*/
+
 }

@@ -1,21 +1,14 @@
 package gachon.jupoza.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import gachon.jupoza.domain.Stock;
-import gachon.jupoza.domain.StockRepository;
+import gachon.jupoza.repository.StockRepository;
 import gachon.jupoza.dto.StockDTO;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -35,20 +28,14 @@ public class portFolioService {
     private final StockRepository stockRepository;
 
 
+    // 클라이언트에서 선택한 주식 종목 5개의 대한 정보를 DB에서 가져온다.
     public List<StockDTO> getStocks(List<String> request)
     {
-        // 요청된 주식 목록 가져고기
-        List<String> stocks = new ArrayList<>();
-        for (int i=0;i<5;i++)
-        {
-            stocks.add(request.get(i));
-        }
-
 
         // DB에서 요청된 주식 정보 가져오가
         List<Stock> StockEntityList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            StockEntityList.add(stockRepository.findByname(stocks.get(i)));
+            StockEntityList.add(stockRepository.findByname(request.get(i)));
         }
 
 
@@ -61,10 +48,9 @@ public class portFolioService {
         }
 
         return stockList;
-
-
     }
 
+    // 파이썬 서버에 접속해 선택한 5개의 주식종목을 입력해 알고리즘을 거친후 종목들의 비중을 반환한다.
     public List<Object> getWeight(Map<String, Object> request) {
 
 
@@ -75,7 +61,6 @@ public class portFolioService {
                 .build()
                 .expand(request)
                 .toUri();
-//        log.info("uri : {}", uri);
 
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -84,8 +69,6 @@ public class portFolioService {
 
         RestTemplate rt = new RestTemplate();
         ResponseEntity<HashMap> responseEntity = rt.exchange(uri, HttpMethod.POST, httpEntity, HashMap.class);
-//        responseEntity.getHeaders().forEach((k, v) -> System.out.println(k + " " + v));
-//        responseEntity.getBody().forEach((k, v) -> System.out.println(k + " " + v));
 
         List<Object> result = new ArrayList<>();
         result = (List<Object>) responseEntity.getBody().get("weightResponse");
@@ -93,7 +76,4 @@ public class portFolioService {
         return result;
 
     }
-
-
-
 }

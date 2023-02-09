@@ -1,7 +1,7 @@
-package gachon.jupoza.crawling;
+package gachon.jupoza.service;
 
 import gachon.jupoza.domain.Stock;
-import gachon.jupoza.domain.StockRepository;
+import gachon.jupoza.repository.StockRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -12,10 +12,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
-public class CrawlingImg implements CommandLineRunner {
+public class CrawlingImgService implements CommandLineRunner {
     private final StockRepository stockRepository;
 
-    public CrawlingImg(StockRepository stockRepository) {
+    public CrawlingImgService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }
 
