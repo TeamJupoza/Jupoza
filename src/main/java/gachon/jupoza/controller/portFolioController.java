@@ -1,6 +1,6 @@
 package gachon.jupoza.controller;
 
-import gachon.jupoza.domain.StockRepository;
+import gachon.jupoza.repository.StockRepository;
 import gachon.jupoza.dto.StockDTO;
 import gachon.jupoza.service.portFolioService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +18,15 @@ import java.util.Map;
 @Slf4j
 public class portFolioController {
 
-    @Autowired
-    StockRepository stockRepository;
+    private final portFolioService portFolioService;
 
-    @Autowired
-    portFolioService portFolioService;
+    public portFolioController(gachon.jupoza.service.portFolioService portFolioService) {
+        this.portFolioService = portFolioService;
+    }
 
     @PostMapping("/api/portfolio")
     Map<String, Object> portfolio(@RequestBody Map<String, Object> request) {
-
+        log.info("{}",request);
         // 요청된 주식목록
         List<String> requestStocks = new ArrayList<>();
         requestStocks = (List<String>) request.get("RequestStock");
@@ -41,8 +41,6 @@ public class portFolioController {
         // 종목들의 Weight 요청하기
         List<Object> weights = new ArrayList<>();
         weights = portFolioService.getWeight(weightRequest);
-
-
         // response
         Map<String, Object> result = new HashMap<>();
         result.put("stocks", stocks);

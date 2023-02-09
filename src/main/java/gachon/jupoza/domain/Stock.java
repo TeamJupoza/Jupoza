@@ -3,12 +3,10 @@ package gachon.jupoza.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@AllArgsConstructor
 @Table(name = "stock")
 public class Stock {
 

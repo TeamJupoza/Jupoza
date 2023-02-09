@@ -18,7 +18,6 @@ public class StockController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private final StockService stockService;
 
     @Autowired //readme 참고
