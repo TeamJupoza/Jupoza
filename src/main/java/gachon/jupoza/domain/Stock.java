@@ -49,7 +49,6 @@ public class Stock {
         this.sale = sale;
         this.std = std;
         this.img = img;
-
     }
 
     public void update(String img){
