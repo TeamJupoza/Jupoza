@@ -1,12 +1,18 @@
+
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.fastcampus.projectboard: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
 spring:
   datasource:
-    # url
-    url: jdbc:mysql://localhost:3306/jupoza?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    # user
+    url: jdbc:mysql://localhost:3306/jupoza
     username: root
-    # password
-    password :
-    # mysql-driver connector
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
