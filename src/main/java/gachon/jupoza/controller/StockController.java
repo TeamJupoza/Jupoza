@@ -1,6 +1,5 @@
 package gachon.jupoza.controller;
 
-import gachon.jupoza.dto.PortfolioDTO;
 import gachon.jupoza.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
