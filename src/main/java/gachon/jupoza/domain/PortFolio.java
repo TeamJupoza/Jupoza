@@ -19,21 +19,22 @@ public class PortFolio extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @OneToMany
-    private List<Stock> StockList = new ArrayList<>();
 
-    @Setter @ManyToOne(optional = false) private weights weights;
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
+    @Setter @OneToMany private List<Stock> StockList = new ArrayList<>();
+
+    @Setter @ManyToOne(optional = false) private Weights weights;
 
 
     protected PortFolio() {
     }
 
-    public PortFolio(List<Stock> stockList, weights weights) {
+    public PortFolio(List<Stock> stockList, Weights weights) {
         StockList = stockList;
         this.weights = weights;
     }
 
-    public static PortFolio of(ArrayList<Stock> stockList, weights weights)
+    public static PortFolio of(ArrayList<Stock> stockList, Weights weights)
     {
         return new PortFolio(stockList, weights);
     }

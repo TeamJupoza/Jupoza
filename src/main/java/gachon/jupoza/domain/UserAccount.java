@@ -24,7 +24,7 @@ public class UserAccount extends AuditingFields{
     private Long id;
 
     @Setter @Column(nullable = false, length = 50)
-    private String user_id;
+    private String userId;
 
     @Setter @Column(nullable = false)
     private String user_password;
@@ -41,8 +41,8 @@ public class UserAccount extends AuditingFields{
     protected UserAccount() {
     }
 
-    public UserAccount(String user_id, String user_password, String email, String nickName, String memo) {
-        this.user_id = user_id;
+    public UserAccount(String userId, String user_password, String email, String nickName, String memo) {
+        this.userId = userId;
         this.user_password = user_password;
         this.email = email;
         this.nickName = nickName;
