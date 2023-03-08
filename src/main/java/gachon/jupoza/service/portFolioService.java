@@ -2,7 +2,6 @@ package gachon.jupoza.service;
 
 import gachon.jupoza.domain.Stock;
 import gachon.jupoza.repository.StockRepository;
-import gachon.jupoza.dto.StockDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -29,7 +28,7 @@ public class portFolioService {
 
 
     // 클라이언트에서 선택한 주식 종목 5개의 대한 정보를 DB에서 가져온다.
-    public List<StockDTO> getStocks(List<String> request)
+    public List<StockDto> getStocks(List<String> request)
     {
 
         // DB에서 요청된 주식 정보 가져오가
@@ -39,9 +38,9 @@ public class portFolioService {
         }
 
 
-        List<StockDTO> stockList = new ArrayList<>();
+        List<StockDto> stockList = new ArrayList<>();
         for (Stock stock : StockEntityList) {
-            StockDTO stockDTO = StockDTO.builder()
+            StockDto stockDTO = StockDto.builder()
                     .entity(stock)
                     .build();
             stockList.add(stockDTO);
