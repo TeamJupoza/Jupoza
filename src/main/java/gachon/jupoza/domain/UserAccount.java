@@ -11,7 +11,6 @@ import java.util.Objects;
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
-        @Index(columnList = "user_id"),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -19,15 +18,14 @@ import java.util.Objects;
 @Entity
 public class UserAccount extends AuditingFields{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Setter @Column(nullable = false, length = 50)
-    private String user_id;
+
+    @Id
+    @Column(length = 50)
+    private String UserId;
 
     @Setter @Column(nullable = false)
-    private String user_password;
+    private String UserPassword;
 
     @Setter @Column(length = 100)
     private String email;
@@ -42,8 +40,8 @@ public class UserAccount extends AuditingFields{
     }
 
     public UserAccount(String userId, String user_password, String email, String nickName, String memo) {
-        this.user_id = userId;
-        this.user_password = user_password;
+        this.UserId = userId;
+        this.UserPassword = user_password;
         this.email = email;
         this.nickName = nickName;
         this.memo = memo;
@@ -59,11 +57,11 @@ public class UserAccount extends AuditingFields{
         if (this == o) return true;
         if (!(o instanceof UserAccount)) return false;
         UserAccount that = (UserAccount) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(UserId, that.UserId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(UserId);
     }
 }

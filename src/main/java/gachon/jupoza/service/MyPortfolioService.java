@@ -24,7 +24,7 @@ public class MyPortfolioService {
 
     // Portfolio Dto를 UserAccount 정보와 같이 엔티티화 해서 DB에 저장한다.
     public void savePortfolio(PortFolioDto dto) {
-        UserAccount userAccount = userAccountRepository.findByUserId(dto.getUserAccountDto().getUserId());
+        UserAccount userAccount = userAccountRepository.getReferenceById(dto.getUserAccountDto().getUserId());
         portfolioRepository.save(dto.toEntity(userAccount));
 
     }
@@ -34,7 +34,7 @@ public class MyPortfolioService {
             PortFolio portFolio = portfolioRepository.getReferenceById(id);
 
             
-            UserAccount userAccount = userAccountRepository.findByUserId(dto.getUserAccountDto().getUserId());
+            UserAccount userAccount = userAccountRepository.getReferenceById(dto.getUserAccountDto().getUserId());
             System.out.println(userAccount);
             // 유저 정보가 입력되지안흥ㅁ
 //            if (portFolio.getUserAccount().getUser_id().equals(userAccount.getUser_id()))

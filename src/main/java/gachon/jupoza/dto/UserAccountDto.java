@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 @Data
 public class UserAccountDto  {
 
-    private final Long id;
-    private final String userId;
-    private final String user_password;
+    private final String UserId;
+    private final String UserPassword;
     private final String email;
     private final String nickName;
     private final String memo;
@@ -22,22 +21,21 @@ public class UserAccountDto  {
     private final LocalDateTime modifiedAt;
     private final String modifiedBy;
 
-    public static UserAccountDto of(Long id, String userId, String user_password, String email, String nickName, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String  modifiedBy)
+    public static UserAccountDto of(String userId, String user_password, String email, String nickName, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String  modifiedBy)
     {
-        return new UserAccountDto(id,userId,user_password,email,nickName,memo,createdAt,createdBy,modifiedAt,modifiedBy);
+        return new UserAccountDto(userId,user_password,email,nickName,memo,createdAt,createdBy,modifiedAt,modifiedBy);
     }
 
-    public static UserAccountDto of(Long id, String userId, String user_password, String email, String nickName, String memo)
+    public static UserAccountDto of(String userId, String user_password, String email, String nickName, String memo)
     {
-        return new UserAccountDto(id,userId,user_password,email,nickName,memo,null,null,null,null);
+        return new UserAccountDto(userId,user_password,email,nickName,memo,null,null,null,null);
     }
 
     public static UserAccountDto from(UserAccount entity)
     {
         return new UserAccountDto(
-                entity.getId(),
-                entity.getUser_id(),
-                entity.getUser_password(),
+                entity.getUserId(),
+                entity.getUserPassword(),
                 entity.getEmail(),
                 entity.getNickName(),
                 entity.getMemo(),
@@ -51,8 +49,8 @@ public class UserAccountDto  {
     public UserAccount toEntity()
     {
         return UserAccount.of(
-                userId,
-                user_password,
+                UserId,
+                UserPassword,
                 email,
                 nickName,
                 memo

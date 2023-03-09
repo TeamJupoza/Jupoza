@@ -1,5 +1,5 @@
-insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('minsang', '{noop}minsang', 'minsang', 'minsang@mail.com', 'I am minsang', now(), 'minsang', now(), 'minsang')
+insert into user_account (user_id, user_password, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', now(), 'minsang', now(), 'minsang')
 ;
 
 
