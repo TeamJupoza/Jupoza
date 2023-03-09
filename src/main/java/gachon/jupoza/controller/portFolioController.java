@@ -1,5 +1,6 @@
 package gachon.jupoza.controller;
 
+import gachon.jupoza.dto.StockDto;
 import gachon.jupoza.service.portFolioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
