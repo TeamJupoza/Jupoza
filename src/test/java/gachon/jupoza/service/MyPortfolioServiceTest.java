@@ -3,6 +3,7 @@ package gachon.jupoza.service;
 
 import gachon.jupoza.domain.PortFolio;
 import gachon.jupoza.domain.Stock;
+import gachon.jupoza.domain.UserAccount;
 import gachon.jupoza.domain.Weights;
 import gachon.jupoza.dto.PortFolioDto;
 import gachon.jupoza.dto.WeightsDto;
@@ -90,8 +91,16 @@ class MyPortfolioServiceTest {
     }
 
     // 내 포트폴리오 정보를 삭제
+
+
+
+
+
+
     private PortFolio createPortfolio() {
         PortFolio portFolio = PortFolio.of(
+                1L,
+                createUser(),
                 List.of(
                         new Stock(1, "TEST1", 249000, 3.62, 39.67, 302.42, 32.0793, 6.83, 59.91, 221.13, 85.65, 66.9, 5, 0.0200477, 2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
                         new Stock(2, "TEST2", 249000, 3.62, 39.67, 302.42, 32.0793, 6.83, 59.91, 221.13, 85.65, 66.9, 5, 0.0200477, 2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
@@ -107,8 +116,9 @@ class MyPortfolioServiceTest {
 
     private PortFolioDto createPortfolioDto()
     {
-        return new PortFolioDto(
+        return PortFolioDto.of(
                 1L,
+                createUser(),
                 List.of(
                         new Stock(1, "TEST1", 249000, 3.62, 39.67, 302.42, 32.0793, 6.83, 59.91, 221.13, 85.65, 66.9, 5, 0.0200477, 2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
                         new Stock(2, "TEST2", 249000, 3.62, 39.67, 302.42, 32.0793, 6.83, 59.91, 221.13, 85.65, 66.9, 5, 0.0200477, 2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
@@ -118,6 +128,11 @@ class MyPortfolioServiceTest {
                 ),
                 new WeightsDto(1L,25,10,15,30,20)
         );
+    }
+
+    private UserAccount createUser()
+    {
+        return UserAccount.of("minsang","minsang","minsang@minsang.com","minsangNick","memo");
     }
 
 }

@@ -34,11 +34,21 @@ public class PortFolio extends AuditingFields {
         this.weights = weights;
     }
 
+    public PortFolio(UserAccount userAccount, List<Stock> stockList, Weights weights) {
+        this.userAccount = userAccount;
+        StockList = stockList;
+        this.weights = weights;
+    }
+
     public static PortFolio of(ArrayList<Stock> stockList, Weights weights)
     {
         return new PortFolio(stockList, weights);
     }
 
+    public static PortFolio of(UserAccount userAccount, ArrayList<Stock> stockList, Weights weights)
+    {
+        return new PortFolio(userAccount, stockList, weights);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
