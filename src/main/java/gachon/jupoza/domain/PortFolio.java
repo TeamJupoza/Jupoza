@@ -21,7 +21,7 @@ public class PortFolio extends AuditingFields {
 
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
-    @Setter @OneToMany private List<Stock> StockList = new ArrayList<>();
+    @Setter @OneToMany private List<Stock> StockList;
 
     @Setter @ManyToOne(optional = false) private Weights weights;
 
@@ -40,12 +40,12 @@ public class PortFolio extends AuditingFields {
         this.weights = weights;
     }
 
-    public static PortFolio of(ArrayList<Stock> stockList, Weights weights)
+    public static PortFolio of(List<Stock> stockList, Weights weights)
     {
         return new PortFolio(stockList, weights);
     }
 
-    public static PortFolio of(UserAccount userAccount, ArrayList<Stock> stockList, Weights weights)
+    public static PortFolio of(UserAccount userAccount, List<Stock> stockList, Weights weights)
     {
         return new PortFolio(userAccount, stockList, weights);
     }

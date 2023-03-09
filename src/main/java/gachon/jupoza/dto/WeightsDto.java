@@ -23,7 +23,7 @@ public class WeightsDto  {
         return new WeightsDto(id, weight1, weight2, weight3, weight4, weight5);
     }
 
-    public  WeightsDto from(Weights entity)
+    public  static WeightsDto from(Weights entity)
     {
         return new WeightsDto(
                 entity.getId(),

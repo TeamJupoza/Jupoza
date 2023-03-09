@@ -34,7 +34,7 @@ public class PortFolioDto {
     }
 
     // entity -> dto 변환
-    public  PortFolioDto from(PortFolio entity)
+    public static PortFolioDto from(PortFolio entity)
     {
         return new PortFolioDto(
                 entity.getId(),
@@ -53,7 +53,7 @@ public class PortFolioDto {
     {
         return PortFolio.of(
                 userAccount,
-                (ArrayList<Stock>)StockList,
+                StockList,
                 weights
         );
     }
