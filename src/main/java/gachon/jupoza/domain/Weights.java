@@ -39,7 +39,26 @@ public class Weights {
         this.weight5 = weight5;
     }
 
+    public Weights(Long id, float weight1, float weight2, float weight3, float weight4, float weight5) {
+        this.id = id;
+        this.weight1 = weight1;
+        this.weight2 = weight2;
+        this.weight3 = weight3;
+        this.weight4 = weight4;
+        this.weight5 = weight5;
+    }
+
     public Weights() {
+    }
+
+    public static Weights of(float weight1, float weight2, float weight3, float weight4, float weight5)
+    {
+        return new Weights(weight1,weight2,weight3,weight4,weight5);
+    }
+
+    public static Weights of(Long id, float weight1, float weight2, float weight3, float weight4, float weight5)
+    {
+        return new Weights(id,weight1,weight2,weight3,weight4,weight5);
     }
 
     @Override
