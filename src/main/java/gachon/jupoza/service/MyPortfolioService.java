@@ -25,7 +25,14 @@ public class MyPortfolioService {
     // Portfolio Dto를 UserAccount 정보와 같이 엔티티화 해서 DB에 저장한다.
     public void savePortfolio(PortFolioDto dto) {
         UserAccount userAccount = userAccountRepository.getReferenceById(dto.getUserAccountDto().getUserId());
-        portfolioRepository.save(dto.toEntity(userAccount));
+        PortFolio portFolio = dto.toEntity(userAccount);
+
+        // MyPortfolio 엔티티에 포트폴리오 정보를 매핑하기 위해 넣어줌
+        for (int i = 0; i < 5; i++) {
+            portFolio.getMyStockList().get(i).setPortFolio(portFolio);
+        }
+
+        portfolioRepository.save(portFolio);
 
     }
 
@@ -42,8 +49,8 @@ public class MyPortfolioService {
 //                if (dto.getStockList() != null){portFolio.setStockList(dto.getStockList());}
 //                if (dto.getWeights() != null){portFolio.setWeights(dto.getWeights());}
 //            }
-            portFolio.setStockList(dto.getStockList());
-            portFolio.setWeights(dto.getWeights());
+//            portFolio.setStockList(dto.getStockList());
+//            portFolio.setWeights(dto.getWeights());
         }catch (EntityNotFoundException e)
         {
             log.warn("포트폴리오 업데이트 실패. 포트폴리오를 업데이트 하는데 필요한 정보를 찾을수 없습니다. - {}", e.getLocalizedMessage());
