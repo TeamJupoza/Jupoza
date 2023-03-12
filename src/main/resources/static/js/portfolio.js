@@ -5,10 +5,8 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 
 // 요청을 보낼 포트폴리오 종목들
 let RequestStocks = []
-let ResponseStock
-let ResponseWeight
-
-
+let ResponseStock = []
+let ResponseWeight = []
 
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
@@ -18,22 +16,54 @@ $(document).ready(function () {
     let storage = []
     storage = JSON.parse(localStorage.getItem('items'))
     console.log(typeof storage)
-    for (let i = 0 ; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
         RequestStocks.push(storage[i]['name'])
     }
     console.log(RequestStocks)
-    $("#outputBalanceCard").css("display","none")
+    $("#outputBalanceCard").css("display", "none")
     loadPortfolio()
+    console.log(ResponseStock)
+    console.log(ResponseWeight)
 
 });
 
 $('#balanceBtn').click(function () {
     setBalance(Number($("#inputBalance").val()))
-    $("#InputBalanceCard").css("display","none")
-    $("#outputBalanceCard").css("display","block")
+    $("#InputBalanceCard").css("display", "none")
+    $("#outputBalanceCard").css("display", "block")
 
 
 })
+
+$('#saveBtn').click(function () {
+    savePortfolio()
+})
+
+// 포트폴리오 정보를 서버에 보내 DB에 저장하는 함수
+function savePortfolio() {
+    console.log('savePortfolio')
+    console.log("RequestStock : " + ResponseStock[0])
+    for (let i = 0; i < 4; i++) {
+        delete ResponseStock[i].no
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/myportfolio/save',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'stockList': ResponseStock,
+            "weights": ResponseWeight
+        })
+        ,
+        success: function (response) {
+            if (response['result'] === 'success') {
+                window.location.href = '/'
+            }
+        }
+
+    })
+}
 
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
@@ -48,7 +78,7 @@ function loadPortfolio() {
         }),
         success: function (response) {
             if (response['result'] === 'success') {
-                console.log("hello")
+
                 console.log(response)
                 ResponseStock = response.stocks
                 ResponseWeight = response.weights
@@ -67,6 +97,7 @@ function setPortfolio(response) {
     portfolioWeightCard()
     setWeightChart()
     setPortfolioCards()
+
 }
 
 
@@ -255,7 +286,7 @@ function setPortfolioCards() {
                 </div>   
     `)
     ctx = document.getElementById('stockChart')
-    let myBarChart = new Chart(ctx, getConfig2(labels, dataset0 , dataset1, dataset2, dataset3, dataset4))
+    let myBarChart = new Chart(ctx, getConfig2(labels, dataset0, dataset1, dataset2, dataset3, dataset4))
 
 
 }
@@ -352,7 +383,7 @@ function getConfig2(label, dataset0, dataset1, dataset2, dataset3, dataset4) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ['주가 상승률', '매출 상승률','순이익 상승률', '연간 배당률'],
+            labels: ['주가 상승률', '매출 상승률', '순이익 상승률', '연간 배당률'],
             datasets: [{
                 label: label.pop(0),
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -446,8 +477,8 @@ function getBalance(weight, balance) {
     let sale1 = balance1 * ResponseStock[0]['sale'] / 100
     let sale2 = balance2 * ResponseStock[1]['sale'] / 100
     let sale3 = balance3 * ResponseStock[2]['sale'] / 100
-    let sale4 = balance4 * ResponseStock[3]['sale']/ 100
-    let sale5 = balance5 * ResponseStock[4]['sale']/ 100
+    let sale4 = balance4 * ResponseStock[3]['sale'] / 100
+    let sale5 = balance5 * ResponseStock[4]['sale'] / 100
     let sale = sale1 + sale2 + sale3 + sale4 + sale5
 
     // 배당 수익
@@ -469,7 +500,7 @@ function getBalance(weight, balance) {
 }
 
 function setBalance(balance) {
-    let result = getBalance(ResponseWeight,balance)
+    let result = getBalance(ResponseWeight, balance)
     $("#outputSale").text(Math.round(result.sale) + "만원")
     $("#outputDividend").text(Math.round(result.dividend) + "만원")
     $("#outputTotalBalance").text(Math.round(result.totalBalance) + "만원")
