@@ -1,9 +1,6 @@
 package gachon.jupoza.dto;
 
-import gachon.jupoza.domain.PortFolio;
-import gachon.jupoza.domain.Stock;
-import gachon.jupoza.domain.UserAccount;
-import gachon.jupoza.domain.Weights;
+import gachon.jupoza.domain.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,32 +12,32 @@ import java.util.List;
  */
 @Data
 public class PortFolioDto {
-    private final Long id;
+
     private final UserAccountDto userAccountDto;
-    private final List<Stock> StockList;
-    private final Weights weights;
+    private final List<MyStock> StockList;
+
     private final LocalDateTime createdAt;
     private final String createdBy;
     private final LocalDateTime modifiedAt;
     private final String modifiedBy;
 
-    public static PortFolioDto of(Long id, UserAccountDto userAccount, List<Stock> stockList, Weights weights)
+
+
+    public static PortFolioDto of(UserAccountDto userAccount, List<MyStock> stockList)
     {
-        return new PortFolioDto(id,userAccount,stockList,weights,null,null,null,null);
+        return new PortFolioDto(userAccount,stockList,null,null,null,null);
     }
-    public static PortFolioDto of(Long id, UserAccountDto userAccount, List<Stock> stockList, Weights weights,LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy)
+    public static PortFolioDto of(UserAccountDto userAccount, List<MyStock> stockList,LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy)
     {
-        return new PortFolioDto(id,userAccount,stockList,weights,createdAt,createdBy,modifiedAt,modifiedBy);
+        return new PortFolioDto(userAccount,stockList,createdAt,createdBy,modifiedAt,modifiedBy);
     }
 
     // entity -> dto 변환
     public static PortFolioDto from(PortFolio entity)
     {
         return new PortFolioDto(
-                entity.getId(),
                 UserAccountDto.from(entity.getUserAccount()),
-                entity.getStockList(),
-                entity.getWeights(),
+                entity.getMyStockList(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
@@ -53,8 +50,7 @@ public class PortFolioDto {
     {
         return PortFolio.of(
                 userAccount,
-                StockList,
-                weights
+                StockList
         );
     }
 }

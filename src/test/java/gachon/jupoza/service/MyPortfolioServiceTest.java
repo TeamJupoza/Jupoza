@@ -4,10 +4,8 @@ package gachon.jupoza.service;
 import gachon.jupoza.domain.PortFolio;
 import gachon.jupoza.domain.Stock;
 import gachon.jupoza.domain.UserAccount;
-import gachon.jupoza.domain.Weights;
 import gachon.jupoza.dto.PortFolioDto;
 import gachon.jupoza.dto.UserAccountDto;
-import gachon.jupoza.dto.WeightsDto;
 import gachon.jupoza.repository.PortfolioRepository;
 import gachon.jupoza.repository.UserAccountRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

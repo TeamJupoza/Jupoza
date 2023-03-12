@@ -17,38 +17,27 @@ public class PortFolio extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PortFolio_id")
     private Long id;
 
-
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
-    @Setter @OneToMany private List<Stock> StockList;
 
-    @Setter @ManyToOne(optional = false) private Weights weights;
-
+    @Setter
+    @OneToMany(mappedBy = "portFolio", cascade = CascadeType.ALL)
+    private List<MyStock> myStockList = new ArrayList<>();
 
     protected PortFolio() {
     }
 
-    public PortFolio(List<Stock> stockList, Weights weights) {
-        StockList = stockList;
-        this.weights = weights;
-    }
-
-    public PortFolio(UserAccount userAccount, List<Stock> stockList, Weights weights) {
+    public PortFolio(UserAccount userAccount, List<MyStock> myStockList) {
         this.userAccount = userAccount;
-        StockList = stockList;
-        this.weights = weights;
+        this.myStockList = myStockList;
     }
 
-    public static PortFolio of(List<Stock> stockList, Weights weights)
-    {
-        return new PortFolio(stockList, weights);
+    public static PortFolio of(UserAccount userAccount, List<MyStock> myStockList) {
+        return new PortFolio(userAccount, myStockList);
     }
 
-    public static PortFolio of(UserAccount userAccount, List<Stock> stockList, Weights weights)
-    {
-        return new PortFolio(userAccount, stockList, weights);
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
