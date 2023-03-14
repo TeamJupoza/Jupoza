@@ -1,9 +1,11 @@
 package gachon.jupoza.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Entity
 @AllArgsConstructor
+@DynamicUpdate
 public class MyStock {
 
     @Id
@@ -18,16 +21,17 @@ public class MyStock {
     private Long id;
 
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JsonBackReference
     @Setter
-    @JoinColumn(name = "port_folio_port_folio_id")
     private PortFolio portFolio;
 
     int StockId;
 
     float weight;
 
-
+    @Setter
+    String userId;
     public MyStock() {
 
     }
@@ -39,6 +43,15 @@ public class MyStock {
 
     public static MyStock of(int stockId, float weight) {
         return new MyStock(stockId,weight);
+    }
+
+    public MyStock(int stockId, float weight, String userId) {
+        StockId = stockId;
+        this.weight = weight;
+        this.userId = userId;
+    }
+    public static MyStock of(int stockId, float weight, String UserId) {
+        return new MyStock(stockId,weight,UserId);
     }
 
     @Override
