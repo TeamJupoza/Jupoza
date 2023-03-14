@@ -2,7 +2,19 @@ insert into user_account (user_id, user_password, email, memo, created_at, creat
     ('minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', now(), 'minsang', now(), 'minsang')
 ;
 
+INSERT INTO `port_folio` (`port_folio_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_id`)
+VALUES
+    (1, '2023-03-13 15:32:32.479332', 'minsang', '2023-03-13 15:32:32.479332', 'minsang', 'minsang');
 
+
+
+INSERT INTO `my_stock` (`id`, `stock_id`, `weight`, `port_folio_port_folio_id`,`user_id`)
+VALUES
+    (1, 33780, 46.14, 1,'minsang'),
+    (2, 326030, 13.66, 1,'minsang'),
+    (3, 68270, 10.68, 1,'minsang'),
+    (4, 137310, 12.27, 1,'minsang'),
+    (5, 35420, 17.25, 1,'minsang');
 
 
 
