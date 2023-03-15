@@ -18,7 +18,7 @@ VALUES
 
 
 
-INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (1, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
+# INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (1, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (60, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (100, '유한양행', 59800, 43.07, 7.04, -47.9382, 4.19449, 0.67, 78.57, 283.37, 179.82, 27.27, 8, 0.0131764, -16.36, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000100.png?sidcode=1668661886531');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (270, '기아', 66300, 7, 160, 220.003, 18.0744, 4.52, 52.23, 135.44, 69.25, 91.48, 3, 0.0170999, 29.06, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000270.png?sidcode=1668661886736');
