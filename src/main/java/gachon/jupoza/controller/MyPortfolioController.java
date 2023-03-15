@@ -100,7 +100,7 @@ public class MyPortfolioController {
 
     }
 
-    
+
     // 내 포트폴리오 정보 삭제
     @PostMapping("/delete")
 
@@ -115,5 +115,31 @@ public class MyPortfolioController {
 
         return result;
 
+    }
+
+    //TODO: 내 아이디로 접속시 인증을 추가해줘야한다.
+    @GetMapping("")
+    public Map<String,Object> MyPortFolio(@RequestParam String userId)
+    {
+        log.info("userId : {} ", userId);
+        // 아이디를 기준으로 포트폴리오 정보를 가져옴
+        Map<String,Object> request = myPortfolioService.MyPortFolio(userId);
+        log.info("request : {} ", request);
+
+        Map<String,Object> result = new HashMap<>();
+
+        // stockList정보와 weights 정보를 반환해주어야한다.
+        if(request.get("result") == "success")
+        {
+            result.put("stocks",request.get("stockList"));
+            result.put("weights",request.get("weights"));
+            result.put("result","success");
+        }
+        else
+        {
+            result.put("result","fail");
+        }
+
+        return result;
     }
 }

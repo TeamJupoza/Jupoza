@@ -46,6 +46,9 @@ public class MainController {
         return "category.html";
     }
 
+    @GetMapping("/myportfolio")
+    public String myPortFolio() {return "my-portfolio.html";}
+
 
 
 
