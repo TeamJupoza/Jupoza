@@ -1,5 +1,6 @@
 package gachon.jupoza.service;
 
+import gachon.jupoza.domain.PortFolio;
 import gachon.jupoza.domain.Stock;
 import gachon.jupoza.dto.StockDto;
 import gachon.jupoza.repository.StockRepository;
@@ -76,4 +77,6 @@ public class portFolioService {
         return result;
 
     }
+
+
 }

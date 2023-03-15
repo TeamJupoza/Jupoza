@@ -1,9 +1,11 @@
 package gachon.jupoza.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,8 +13,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@ToString(callSuper = true)
 @Entity
+@ToString(callSuper = true)
+@Transactional
 public class PortFolio extends AuditingFields {
 
     @Id
@@ -20,11 +23,13 @@ public class PortFolio extends AuditingFields {
     @Column(name = "PortFolio_id")
     private Long id;
 
-    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")  private UserAccount userAccount;
 
+    @JsonManagedReference
     @Setter
-    @OneToMany(mappedBy = "portFolio", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "portFolio", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<MyStock> myStockList = new ArrayList<>();
+
 
     protected PortFolio() {
     }
@@ -50,4 +55,6 @@ public class PortFolio extends AuditingFields {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
+

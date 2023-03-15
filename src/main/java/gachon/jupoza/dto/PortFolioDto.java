@@ -2,19 +2,22 @@ package gachon.jupoza.dto;
 
 import gachon.jupoza.domain.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A DTO for the {@link gachon.jupoza.domain.PortFolio} entity
  */
 @Data
+@Setter
+@Getter
 public class PortFolioDto {
 
     private final UserAccountDto userAccountDto;
-    private final List<MyStock> StockList;
+    @Getter @Setter private final List<MyStock> StockList;
 
     private final LocalDateTime createdAt;
     private final String createdBy;

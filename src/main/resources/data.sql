@@ -2,11 +2,23 @@ insert into user_account (user_id, user_password, email, memo, created_at, creat
     ('minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', now(), 'minsang', now(), 'minsang')
 ;
 
+INSERT INTO `port_folio` (`port_folio_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_id`)
+VALUES
+    (1, '2023-03-13 15:32:32.479332', 'minsang', '2023-03-13 15:32:32.479332', 'minsang', 'minsang');
 
 
 
+INSERT INTO `my_stock` (`id`, `stock_id`, `weight`, `port_folio_port_folio_id`,`user_id`)
+VALUES
+    (1, 33780, 46.14, 1,'minsang'),
+    (2, 326030, 13.66, 1,'minsang'),
+    (3, 68270, 10.68, 1,'minsang'),
+    (4, 137310, 12.27, 1,'minsang'),
+    (5, 35420, 17.25, 1,'minsang');
 
-INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (1, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
+
+
+# INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (1, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (60, '메리츠화재', 31450, 6.13, -2.89, 53.0565, 9.56164, 1.97, 8.65, 0, 0, 1056.04, 0, 0.0265062, 142.11, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000060.png?sidcode=1668661886079');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (100, '유한양행', 59800, 43.07, 7.04, -47.9382, 4.19449, 0.67, 78.57, 283.37, 179.82, 27.27, 8, 0.0131764, -16.36, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000100.png?sidcode=1668661886531');
 INSERT INTO JUPOZA.stock (stockid, name, price, per, roe, net, sale, dividend, bis, current, quick, debt, score, std, rate, img) VALUES (270, '기아', 66300, 7, 160, 220.003, 18.0744, 4.52, 52.23, 135.44, 69.25, 91.48, 3, 0.0170999, 29.06, 'https://ssl.pstatic.net/imgfinance/chart/item/area/day/000270.png?sidcode=1668661886736');

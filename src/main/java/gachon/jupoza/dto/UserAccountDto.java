@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class UserAccountDto  {
 
-    private final String UserId;
+    private final String userId;
     private final String UserPassword;
     private final String email;
     private final String nickName;
@@ -49,7 +49,7 @@ public class UserAccountDto  {
     public UserAccount toEntity()
     {
         return UserAccount.of(
-                UserId,
+                userId,
                 UserPassword,
                 email,
                 nickName,

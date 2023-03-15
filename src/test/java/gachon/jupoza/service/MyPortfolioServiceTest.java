@@ -1,8 +1,8 @@
 package gachon.jupoza.service;
 
 
+import gachon.jupoza.domain.MyStock;
 import gachon.jupoza.domain.PortFolio;
-import gachon.jupoza.domain.Stock;
 import gachon.jupoza.domain.UserAccount;
 import gachon.jupoza.dto.PortFolioDto;
 import gachon.jupoza.dto.UserAccountDto;
@@ -59,14 +59,13 @@ class MyPortfolioServiceTest {
         Long portfolioId = 1L;
         PortFolio portFolio = createPortfolio();
         given(portfolioRepository.findById(portfolioId)).willReturn(Optional.of(portFolio));
-
+        System.out.println(portFolio);
         // when
-        PortFolioDto dto = sut.getPortfolio(portfolioId);
-
+        PortFolio dto = sut.getPortfolio(portFolio.getUserAccount().getUserId());
+        System.out.println(dto);
         // then
         assertThat(dto).
-                hasFieldOrPropertyWithValue("stockList", portFolio.getStockList())
-                .hasFieldOrPropertyWithValue("weights",portFolio.getWeights());
+                hasFieldOrPropertyWithValue("myStockList", portFolio.getMyStockList());
         then(portfolioRepository).should().findById(portfolioId);
 
     }
@@ -80,32 +79,29 @@ class MyPortfolioServiceTest {
 
         PortFolio portFolio = createPortfolio();
         PortFolioDto dto = createPortfolioDto(
-                1L,
                 UserAccountDto.from(createUser()),
                 List.of(
-                        new Stock(6, "TEST6", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(7, "TEST7", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(8, "TEST8", 249000,(float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(9, "TEST9", 249000,(float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(10, "TEST10", 249000,(float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308")
-                ),
-                new WeightsDto(2L,25,10,15,30,20).toEntity()
+                        new MyStock(6,10),
+                        new MyStock(7,30),
+                        new MyStock(8,20),
+                        new MyStock(9,15),
+                        new MyStock(10,15)
+                )
         );
 
 
-        given(portfolioRepository.getReferenceById(dto.getId())).willReturn(portFolio);
+        given(portfolioRepository.findByUserAccount_UserId(dto.getUserAccountDto().getUserId())).willReturn(portFolio);
 //        given(userAccountRepository.getReferenceById(dto.getUserAccountDto().getId())).willReturn(dto.getUserAccountDto().toEntity());
 
 
 
         // when
-        sut.updatePortfolio(dto.getId(), dto);
+        sut.updatePortfolio(dto.getUserAccountDto().getUserId(), dto);
 
         // then
         assertThat(portFolio).
-                hasFieldOrPropertyWithValue("stockList", portFolio.getStockList())
-                .hasFieldOrPropertyWithValue("weights",portFolio.getWeights());
-        then(portfolioRepository).should().getReferenceById(dto.getId());
+                hasFieldOrPropertyWithValue("myStockList", portFolio.getMyStockList());
+        then(portfolioRepository).should().findByUserAccount_UserId(dto.getUserAccountDto().getUserId());
     }
 
     // 내 포트폴리오 정보를 삭제
@@ -132,40 +128,46 @@ class MyPortfolioServiceTest {
 
     private PortFolio createPortfolio() {
         PortFolio portFolio = PortFolio.of(
-
                 createUser(),
                 List.of(
-                        new Stock(1, "TEST1", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(2, "TEST2", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(3, "TEST3", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(4, "TEST4", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(5, "TEST5", 249000,(float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308")
-                ),
-                Weights.of(25,10,15,30,20)
+                        new MyStock(1,20),
+                        new MyStock(2,20),
+                        new MyStock(3,20),
+                        new MyStock(4,20),
+                        new MyStock(5,20)
+                )
+
         );
+        for (int i = 0; i < 5; i++) {
+            portFolio.getMyStockList().get(i).setPortFolio(portFolio);
+        }
+
         return portFolio;
     }
 
 
     private PortFolioDto createPortfolioDto()
     {
-        return createPortfolioDto(
-                1L,
+        PortFolioDto portFolioDto = PortFolioDto.of(
                 UserAccountDto.from(createUser()),
                 List.of(
-                        new Stock(1, "TEST1", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(2, "TEST2", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(3, "TEST3", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(4, "TEST4", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308"),
-                        new Stock(5, "TEST5", 249000, (float) 3.62,  (float) 39.67, (float)  302.42, (float)  32.0793, (float)  6.83,  (float) 59.91,  (float) 221.13, (float)  85.65,  (float) 66.9, (float)  5, (float)  0.0200477, (float)  2.56, "https://ssl.pstatic.net/imgfinance/chart/item/area/day/005490.png?sidcode=1668661888308")
-                ),
-                new WeightsDto(1L,25,10,15,30,20).toEntity()
+                        new MyStock(1,20),
+                        new MyStock(2,20),
+                        new MyStock(3,20),
+                        new MyStock(4,20),
+                        new MyStock(5,20)
+                )
+
         );
+        for (int i = 0; i < 5; i++) {
+            portFolioDto.getStockList().get(i).setPortFolio(portFolioDto.toEntity(portFolioDto.getUserAccountDto().toEntity()));
+        }
+        return portFolioDto;
     }
 
-    private PortFolioDto createPortfolioDto(Long id, UserAccountDto userAccount, List<Stock> stockList, Weights weights)
+    private PortFolioDto createPortfolioDto(UserAccountDto userAccount, List<MyStock> stockList)
     {
-        return PortFolioDto.of(id,userAccount,stockList,weights);
+        return PortFolioDto.of(userAccount,stockList);
     }
 
     private UserAccount createUser()
