@@ -22,4 +22,6 @@ public interface MyStockRepository extends JpaRepository<MyStock, Long> {
     @Modifying
     @Query("delete from MyStock")
     void deleteAllPerQuery();
+
+    List<MyStock> findAllByUserId(String userId);
 }
