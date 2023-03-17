@@ -1,13 +1,16 @@
 package gachon.jupoza.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @ToString(callSuper = true)
@@ -17,6 +20,8 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
+@Transactional
+@AllArgsConstructor
 public class Article extends AuditingFields {
 
     @Id
@@ -31,10 +36,15 @@ public class Article extends AuditingFields {
 
 
 
-    @ToString.Exclude
-    @OrderBy("createdAt DESC")
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+//    @ToString.Exclude
+//    @OrderBy("createdAt DESC")
+//    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+//    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+
+    @JsonManagedReference
+    @Setter
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<ArticleStock> myStockList = new ArrayList<>();
 
 
     protected Article() {}
@@ -49,7 +59,19 @@ public class Article extends AuditingFields {
         return new Article(userAccount, title, content);
     }
 
-    @Override
+    public Article(UserAccount userAccount, String title, String content, List<ArticleStock> myStockList) {
+        this.userAccount = userAccount;
+        this.title = title;
+        this.content = content;
+        this.myStockList = myStockList;
+    }
+
+    public static Article of(UserAccount userAccount, String title, String content, List<ArticleStock> articleStockList) {
+        return new Article(userAccount, title, content, articleStockList);
+    }
+
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Article)) return false;
