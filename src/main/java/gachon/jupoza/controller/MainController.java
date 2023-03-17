@@ -49,6 +49,11 @@ public class MainController {
     @GetMapping("/myportfolio")
     public String myPortFolio() {return "my-portfolio.html";}
 
+    @GetMapping("/articleform")
+    public String articleForm(){return "article-form.html";}
+
+    @GetMapping("/articledetail")
+    public String articleDetail(){return "article-detail.html";}
 
 
 
