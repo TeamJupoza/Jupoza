@@ -1,6 +1,7 @@
-insert into user_account (user_id, user_password, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', now(), 'minsang', now(), 'minsang')
-;
+INSERT INTO `user_account` (`user_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_password`, `email`, `memo`, `nick_name`)
+VALUES
+    ('minsang', '2023-03-16 15:21:58.000000', 'minsang', '2023-03-16 15:21:58.000000', 'minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', 'ganghal');
+
 
 INSERT INTO `port_folio` (`port_folio_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_id`)
 VALUES
@@ -15,6 +16,22 @@ VALUES
     (3, 68270, 10.68, 1,'minsang'),
     (4, 137310, 12.27, 1,'minsang'),
     (5, 35420, 17.25, 1,'minsang');
+
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (1, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (1, 60, 'minsang', 15, 1),
+    (2, 6400, 'minsang', 20, 1),
+    (3, 660, 'minsang', 25, 1),
+    (4, 3490, 'minsang', 30, 1),
+    (5, 15760, 'minsang', 10, 1);
+
+
 
 
 
