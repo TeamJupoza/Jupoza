@@ -1,4 +1,5 @@
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -25,6 +26,11 @@
 <body id="page-top">
 
 <!-- Page Wrapper -->
+<!-- articleId 를 modelMap 에서 가져오기 위해 추가함 -->
+<input id="articleIdHidden" th:value = "${articleId}" style="display: none">
+
+<!-- End of articleId 를 modelMap 에서 가져오기 위해 추가함 -->
+
 <div id="wrapper">
 
     <!-- Sidebar -->

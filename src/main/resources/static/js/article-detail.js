@@ -3,18 +3,19 @@ src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 // 쿠키 사용을 위한 Jquery-cookie 임포트
 src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
 
+
+
+
 // 요청을 보낼 포트폴리오 종목들
 let ResponseArticle
 let ResponseStock = []
 let ResponseWeight = []
 
-// TODO: 게시판에서 게시글로 이동할떄 articleId를 받아야한다.
-let articleId = 1
 
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
-
+    let articleId = $('#articleIdHidden').val()
     loadMyPortfolio(articleId)
     console.log(ResponseStock)
     console.log(ResponseWeight)
