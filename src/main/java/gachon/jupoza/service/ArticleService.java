@@ -140,7 +140,6 @@ public class ArticleService {
                 weights.add(articleStock.getWeight());
             }
             request.put("weights", weights);
-            request.put("1", 1);
 
 
             return request;
