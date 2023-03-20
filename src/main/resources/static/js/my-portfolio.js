@@ -39,8 +39,28 @@ $('#deleteBtn').click(function () {
     
 })
 
+// TODO : 유저 아이디를 추가해야한다.
 function deletePortFolio() {
-    
+    $.ajax({
+        type: 'POST',
+        url: '/api/myportfolio/delete',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'userId' : 'minsang'
+        })
+        ,
+        success: function (response) {
+            if (response['result'] === 'success') {
+                alert("포트폴리오를 삭제 했습니다.")
+                location.replace("/")
+            }
+            else{
+                alert("포트폴리오 삭제를 실패했습니다.")
+            }
+        }
+
+    })
+
 }
 
 // 포트폴리오 정보를 서버에 보내 DB에 저장하는 함수
