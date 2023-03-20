@@ -8,6 +8,32 @@ VALUES
     (1, '2023-03-13 15:32:32.479332', 'minsang', '2023-03-13 15:32:32.479332', 'minsang', 'minsang');
 
 
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (1, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (2, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (3, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (4, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (5, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
+VALUES
+    (6, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
+
+
 
 INSERT INTO `my_stock` (`id`, `stock_id`, `weight`, `port_folio_port_folio_id`,`user_id`)
 VALUES
@@ -18,10 +44,6 @@ VALUES
     (5, 35420, 17.25, 1,'minsang');
 
 
-INSERT INTO `article` (`id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `content`, `title`, `user_account_user_id`)
-VALUES
-    (1, '2023-03-16 15:18:36.063404', 'minsang', '2023-03-16 15:18:36.063404', 'minsang', 'testContent', 'testTitle', 'minsang');
-
 
 INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
 VALUES
@@ -30,6 +52,48 @@ VALUES
     (3, 660, 'minsang', 25, 1),
     (4, 3490, 'minsang', 30, 1),
     (5, 15760, 'minsang', 10, 1);
+
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (6, 60, 'minsang', 15, 2),
+    (7, 6400, 'minsang', 20, 2),
+    (8, 660, 'minsang', 25, 2),
+    (9, 3490, 'minsang', 30, 2),
+    (10, 15760, 'minsang', 10, 2);
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (11, 60, 'minsang', 15, 3),
+    (12, 6400, 'minsang', 20, 3),
+    (13, 660, 'minsang', 25, 3),
+    (14, 3490, 'minsang', 30, 3),
+    (15, 15760, 'minsang', 10, 3);
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (16, 60, 'minsang', 15, 4),
+    (17, 6400, 'minsang', 20, 4),
+    (18, 660, 'minsang', 25, 4),
+    (19, 3490, 'minsang', 30, 4),
+    (20, 15760, 'minsang', 10, 4);
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (21, 60, 'minsang', 15, 5),
+    (22, 6400, 'minsang', 20, 5),
+    (23, 660, 'minsang', 25, 5),
+    (24, 3490, 'minsang', 30, 5),
+    (25, 15760, 'minsang', 10, 5);
+
+INSERT INTO `article_stock` (`id`, `stock_id`, `user_id`, `weight`, `article_id`)
+VALUES
+    (26, 60, 'minsang', 15, 6),
+    (27, 6400, 'minsang', 20, 6),
+    (28, 660, 'minsang', 25, 6),
+    (29, 3490, 'minsang', 30, 6),
+    (30, 15760, 'minsang', 10, 6);
+
 
 
 
