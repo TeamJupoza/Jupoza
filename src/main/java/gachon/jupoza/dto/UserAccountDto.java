@@ -15,20 +15,19 @@ public class UserAccountDto  {
     private final String UserPassword;
     private final String email;
     private final String nickName;
-    private final String memo;
     private final LocalDateTime createdAt;
     private final String createdBy;
     private final LocalDateTime modifiedAt;
     private final String modifiedBy;
 
-    public static UserAccountDto of(String userId, String user_password, String email, String nickName, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String  modifiedBy)
+    public static UserAccountDto of(String userId, String user_password, String email, String nickName, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String  modifiedBy)
     {
-        return new UserAccountDto(userId,user_password,email,nickName,memo,createdAt,createdBy,modifiedAt,modifiedBy);
+        return new UserAccountDto(userId,user_password,email,nickName,createdAt,createdBy,modifiedAt,modifiedBy);
     }
 
-    public static UserAccountDto of(String userId, String user_password, String email, String nickName, String memo)
+    public static UserAccountDto of(String userId, String user_password, String email, String nickName)
     {
-        return new UserAccountDto(userId,user_password,email,nickName,memo,null,null,null,null);
+        return new UserAccountDto(userId,user_password,email,nickName,null,null,null,null);
     }
 
     public static UserAccountDto from(UserAccount entity)
@@ -38,7 +37,6 @@ public class UserAccountDto  {
                 entity.getUserPassword(),
                 entity.getEmail(),
                 entity.getNickName(),
-                entity.getMemo(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
@@ -52,8 +50,7 @@ public class UserAccountDto  {
                 userId,
                 UserPassword,
                 email,
-                nickName,
-                memo
+                nickName
         );
     }
 
