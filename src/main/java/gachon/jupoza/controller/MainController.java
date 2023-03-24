@@ -1,5 +1,6 @@
 package gachon.jupoza.controller;
 
+import gachon.jupoza.utils.securityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -70,8 +71,21 @@ public class MainController {
     @GetMapping("/article")
     public String articles() {
         return "article.html";
+    }
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login.html";
 
     }
+    @GetMapping("/register")
+    public String register() {
+        return "register.html";
+
+    }
+
+
 
 
 }

@@ -33,7 +33,7 @@ public class ArticleService {
 
     public void saveArticle(ArticleRequest articleRequest) {
         // 유저 정보 DB에서 조회
-        UserAccount userAccount = userAccountRepository.findByUserId(articleRequest.getUserId());
+        UserAccount userAccount = userAccountRepository.findByUserId(articleRequest.getUserId()).get();
         ArticleDto articleDto = articleRequest.toDto();
         Article article = articleDto.toEntity(userAccount);
 
@@ -56,7 +56,7 @@ public class ArticleService {
     }
 
     public void deleteArticle(Long articleId, String userId) {
-        UserAccount userAccount = userAccountRepository.findByUserId(userId);
+        UserAccount userAccount = userAccountRepository.findByUserId(userId).get();
         log.info("Delete_userAccount : {} ", userAccount);
         Article article = articleRepository.getReferenceById(articleId);
 
@@ -70,7 +70,7 @@ public class ArticleService {
         // article 정보, user 정보를 db에서 가져온다.
         Optional<Article> article = articleRepository.findById(articleId);
         article.orElseThrow();
-        UserAccount userAccount = userAccountRepository.findByUserId(articleRequest.getUserId());
+        UserAccount userAccount = userAccountRepository.findByUserId(articleRequest.getUserId()).get();
 
         // articleRequest로 부터 article 객체를 파싱함
         Article updatingArticle = articleRequest.toDto().toEntity(userAccount);

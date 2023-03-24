@@ -57,7 +57,7 @@ function savePortfolio() {
         })
         ,
         success: function (response) {
-            if (response['result'] === 'success') {
+            if (response.result === 'success') {
                 alert("포트폴리오 등록에 성공했습니다.")
                 location.replace("/")
             }
