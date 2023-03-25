@@ -11,19 +11,21 @@ let ResponseWeight = []
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
+    if (localStorage.length != 5)
+    {
+        alert('먼저 주식을 담아주세요.')
+        location.replace("/list")
+    }
     //RequestStocks = ["삼성전자", "LG", "포스코케미칼", "현대차", "삼성중공업"]
     // 로컬스토리지에서 포트폴리오 변수들을 가져옴
     let storage = []
     storage = JSON.parse(localStorage.getItem('items'))
-    console.log(typeof storage)
     for (let i = 0; i < 5; i++) {
         RequestStocks.push(storage[i]['name'])
     }
-    console.log(RequestStocks)
     $("#outputBalanceCard").css("display", "none")
     loadPortfolio()
-    console.log(ResponseStock)
-    console.log(ResponseWeight)
+
 
 });
 

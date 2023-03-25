@@ -159,7 +159,7 @@ public class ArticleService {
             articleResponseList.add(ArticleResponse.of(
                     String.valueOf(article.getId()),
                     article.getTitle(),
-                    article.getCreatedBy(),
+                    article.getUserAccount().getUserId(),
                     String.valueOf(article.getCreatedAt())
             ));
 

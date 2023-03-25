@@ -15,6 +15,8 @@ $('#register-btn').click(function () {
 
 })
 
+// 내 포트폴리오가 있는지 체크해야한다.
+
 function saveArticle(title, content, userId) {
 
     $.ajax({
@@ -32,9 +34,11 @@ function saveArticle(title, content, userId) {
                 alert("글 등록에 성공했습니다.")
                 location.replace("/article")
             }
-            else{
-                alert("포트폴리오 등록에 실패했습니다.")
-            }
+
+        }
+        ,error: function (response) {
+            alert("글 등록에 실패했습니다.\n 내 포트폴리오를 먼저 등록해주세요.")
+            location.replace("/article")
         }
 
     })

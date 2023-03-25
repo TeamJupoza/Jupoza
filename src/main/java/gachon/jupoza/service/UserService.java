@@ -47,11 +47,11 @@ public class UserService {
     {
         UserAccount userAccount = new UserAccount
                 (
-                userRegisterRequestDto.getUserId(),
-                userRegisterRequestDto.getUserPassword(),
-                userRegisterRequestDto.getUserEmail(),
-                userRegisterRequestDto.getUserNickname(),
-                List.of("USER")
+                        userRegisterRequestDto.getUserId(),
+                        "{noop}"+userRegisterRequestDto.getUserPassword(),
+                        userRegisterRequestDto.getUserEmail(),
+                        userRegisterRequestDto.getUserNickname(),
+                        List.of("USER")
                 );
 
 

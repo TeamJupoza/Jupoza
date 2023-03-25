@@ -94,7 +94,6 @@ function savePortfolio() {
 
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
-//TODO: get Url을 변경해야함
 function loadMyPortfolio(userId) {
     $.ajax({
         type: "GET",

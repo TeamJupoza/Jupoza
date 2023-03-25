@@ -79,7 +79,7 @@ public class MyPortfolioController {
 
 
     // 내 포트폴리오 정보 수정
-    // TODO: 인증 정보 수정
+    // 포트폴리오를 저장시 중복체크를함
     @PostMapping("/update")
     public Map<String,Object> GetMyPortFolio( @RequestBody PortfolioRequest portfolioRequest) throws JsonProcessingException {
 

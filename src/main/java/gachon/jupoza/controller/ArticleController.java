@@ -31,20 +31,24 @@ public class ArticleController {
 
     // 게시글 등록,수정 ( 게시글이 존재하면 게시글을 삭제하고 다시 추가해 수정함 )
     @PostMapping("/api/save")
-    Map<String, Object> saveArticle(@RequestBody ArticleRequest articleRequest) {
+    ResponseEntity<Map<String, Object>> saveArticle(@RequestBody ArticleRequest articleRequest) {
         log.info("ArticleRequest : {}", articleRequest);
-
-        articleService.saveArticle(articleRequest);
-
         Map<String, Object> result = new HashMap<>();
-
-        result.put("result", "success");
-
-        return result;
+        try{
+            articleService.saveArticle(articleRequest);
+            result.put("result", "success");
+            return new ResponseEntity(result, HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            e.getLocalizedMessage();
+            result.put("result", "fali");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     // 게시글 삭제
- 
+
     @GetMapping("/api/delete/{articleId}/{userId}")
     Map<String, Object> deleteArticle(@PathVariable String userId, @PathVariable Long articleId) {
         log.info("delete  userId : {}, articleId : {}", userId, articleId);

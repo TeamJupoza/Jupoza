@@ -41,7 +41,7 @@ $('#updateBtn').click(function () {
 $('#deleteBtn').click(function () {
     if ( confirm("정말로 게시글을 삭제 하겠습니까?"))
     {
-        deleteArticle(articleId, ResponseArticle.createdBy)
+        deleteArticle(articleId, ResponseArticle.userAccount.userId)
         alert("게시글을 삭제했습니다.")
         location.replace("/article")
     }
@@ -106,7 +106,7 @@ function loadMyPortfolio(articleId) {
 function setDeleteBtn(userId) {
     if (userId == localStorage.getItem("userId"))
     {
-        $('#deleteBtn')
+        $('#deleteBtn').css("display","block")
     }
 
 
@@ -119,7 +119,7 @@ function setPortfolio(response) {
     setWeightChart()
     setPortfolioCards()
     setArticle()
-    setDeleteBtn(ResponseArticle.createdBy)
+    setDeleteBtn(ResponseArticle.userAccount.userId)
 
 }
 
