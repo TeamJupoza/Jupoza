@@ -44,7 +44,7 @@ public class ArticleController {
     }
 
     // 게시글 삭제
-    // TODO : 유저 인증 정보를 입력해야함
+ 
     @GetMapping("/api/delete/{articleId}/{userId}")
     Map<String, Object> deleteArticle(@PathVariable String userId, @PathVariable Long articleId) {
         log.info("delete  userId : {}, articleId : {}", userId, articleId);
