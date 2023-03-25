@@ -10,8 +10,11 @@ import gachon.jupoza.dto.Request.PortfolioRequest;
 import gachon.jupoza.dto.UserAccountDto;
 import gachon.jupoza.repository.StockRepository;
 import gachon.jupoza.service.MyPortfolioService;
+import gachon.jupoza.utils.securityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -30,19 +33,11 @@ public class MyPortfolioController {
     // 내 DB에 포트폴리오 정보를 저장
     @PostMapping("/save")
     public Map<String,Object> SavePortFolio( @RequestBody PortfolioRequest portfolioRequest) throws IOException {
-        System.out.println(portfolioRequest.getClass().getName());
 
-        log.info("portfolioRequest : {}",portfolioRequest.toString());
-
-        //TODO: 사용자 인증 정보를 만들어야함
-        UserAccountDto userAccountDto = UserAccountDto.of("minsang","minsang","minsang@naver.com","GangHal","memo");
-        PortFolioDto portFolioDto = portfolioRequest.toDto(userAccountDto);
-
-        myPortfolioService.savePortfolio(portFolioDto);
+        myPortfolioService.savePortfolio(portfolioRequest);
 
         Map<String,Object> result = new HashMap<>();
         result.put("result","success");
-
         return result;
 
     }
@@ -84,10 +79,11 @@ public class MyPortfolioController {
 
 
     // 내 포트폴리오 정보 수정
+    // 포트폴리오를 저장시 중복체크를함
     @PostMapping("/update")
     public Map<String,Object> GetMyPortFolio( @RequestBody PortfolioRequest portfolioRequest) throws JsonProcessingException {
 
-        UserAccountDto userAccountDto = UserAccountDto.of("minsang","minsang","minsang@naver.com","GangHal","memo");
+        UserAccountDto userAccountDto = UserAccountDto.of("minsang","minsang","minsang@naver.com","GangHal");
         PortFolioDto portFolioDto = portfolioRequest.toDto(userAccountDto);
 
         myPortfolioService.updatePortfolio(userAccountDto.getUserId(), portFolioDto);
@@ -116,8 +112,6 @@ public class MyPortfolioController {
         return result;
 
     }
-
-    //TODO: 내 아이디로 접속시 인증을 추가해줘야한다.
     @GetMapping("")
     public Map<String,Object> MyPortFolio(@RequestParam String userId)
     {
@@ -142,4 +136,27 @@ public class MyPortfolioController {
 
         return result;
     }
+
+    @GetMapping("/validation/{userId}")
+    public ResponseEntity<Map<String,Object>> sidebarValidation(@PathVariable String userId)
+    {
+        Map<String, Object> result = new HashMap<>();
+
+        String currentMemberId = securityUtil.getCurrentMemberId();
+
+
+        if (userId.equals(currentMemberId))
+        {
+            log.info("성공");
+            result.put("result", "success");
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        else
+        {
+            log.info("실패");
+            result.put("result", "fail");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

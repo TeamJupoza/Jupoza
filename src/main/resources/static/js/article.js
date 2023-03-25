@@ -3,10 +3,10 @@ src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 // 쿠키 사용을 위한 Jquery-cookie 임포트
 src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
 
-
 let dataTable
 $(document).ready(function () {
     setTable()
+    articleFormValidation()
 
 
 });
@@ -16,10 +16,6 @@ $('#dataTable').on('click', 'td', function () {
     console.log(data)
 })
 
-
-$('#toArticleForm').click(function () {
-    location.replace("/articleform")
-})
 
 function setTable() {
 
@@ -43,16 +39,34 @@ function setTable() {
             ,
             {data: "createdBy"},
             {data: "createdAt"}
-        ],
-        buttons: [
-            {
-                text: '글쓰기',
-                action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
-                }
-            }
         ]
     })
+}
+
+function articleFormValidation() {
+    $.ajax({
+        type: 'GET',
+        url: 'article/api/article-form/validation/'+localStorage.getItem("userId"),
+        async:false,
+        beforeSend: function (xhr)
+        {
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization",localStorage.getItem("accessToken"));
+        }
+        ,
+        success: function (response) {
+            $("#articleFormBtn").append(`
+                    <a href="/articleform" class="btn btn-primary" id="toArticleForm" style="color: white">글쓰기</a>
+            `)
+        }
+        ,
+        // 아이디와 비밀번호가 틀릴경우
+        error : function (response) {
+            result = "fail"
+        }
+
+    })
+
 }
 
 

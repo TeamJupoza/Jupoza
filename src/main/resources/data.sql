@@ -1,6 +1,10 @@
-INSERT INTO `user_account` (`user_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_password`, `email`, `memo`, `nick_name`)
+INSERT INTO `user_account` (`user_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_password`, `email`, `nick_name`)
 VALUES
-    ('minsang', '2023-03-16 15:21:58.000000', 'minsang', '2023-03-16 15:21:58.000000', 'minsang', '{noop}minsang', 'minsang@naver.com', 'I am minsang', 'ganghal');
+    ('minsang', '2023-03-16 15:21:58.000000', 'minsang', '2023-03-16 15:21:58.000000', 'minsang', '{noop}minsang', 'minsang@naver.com', 'ganghal');
+
+INSERT INTO `user_account_roles` (`user_account_user_id`, `roles`)
+VALUES
+    ('minsang', 'USER');
 
 
 INSERT INTO `port_folio` (`port_folio_id`, `created_at`, `created_by`, `modified_at`, `modified_by`, `user_id`)

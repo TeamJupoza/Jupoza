@@ -1,3 +1,40 @@
+// Jquery Import
+src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+// 쿠키 사용을 위한 Jquery-cookie 임포트
+src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
+function validationSidBar() {
+    // 서버로 부터 아이디와 비밀번호가 맞는지 확인
+    $.ajax({
+        type: 'GET',
+        url: '/api/myportfolio/validation/'+localStorage.getItem("userId"),
+        async:false,
+        beforeSend: function (xhr)
+        {
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization",localStorage.getItem("accessToken"));
+        }
+        ,
+        success: function (response) {
+            // 아이디와 비밀번호가 맞을경우
+            $('#sidebar-myportfolio').append(
+                `                        
+                            <a class="nav-link"  href="/myportfolio">
+                                <i class="fas fa-fw fa-table"></i>
+                                <span>MyPortfolio</span></a>
+                `
+            )
+        }
+        ,
+        // 아이디와 비밀번호가 틀릴경우
+        error : function (response) {
+            result = "fail"
+        }
+
+    })
+
+}
+
+
 $(document).ready(function () {
     $('#sidebar').append(`
         <!-- Sidebar -->
@@ -70,13 +107,11 @@ $(document).ready(function () {
                                 <i class="fas fa-fw fa-table"></i>
                                 <span>Portfolio</span></a>
                         </li>
-                        <!-- TODO : 내 포트폴리오 접속시 유저아이디 입력을 바꿔야함 -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="myportfolio?userId=minsang">
-                                <i class="fas fa-fw fa-table"></i>
-                                <span>MyPortfolio</span></a>
+                        
+                        <li class="nav-item" id="sidebar-myportfolio">
                         </li>
-                                                <li class="nav-item">
+
+                        <li class="nav-item">
                             <a class="nav-link" href="article">
                                 <i class="fas fa-fw fa-table"></i>
                                 <span>포트폴리오 공유 게시판</span></a>
@@ -91,6 +126,11 @@ $(document).ready(function () {
         </ul>
     <!-- End of Sidebar -->
     `
-)
+    )
+
+    validationSidBar()
 
 });
+
+
+

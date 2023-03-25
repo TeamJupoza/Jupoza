@@ -6,8 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import gachon.jupoza.dto.Request.ArticleRequest;
 import gachon.jupoza.dto.Response.ArticleResponse;
 import gachon.jupoza.service.ArticleService;
+import gachon.jupoza.utils.securityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,20 +31,24 @@ public class ArticleController {
 
     // 게시글 등록,수정 ( 게시글이 존재하면 게시글을 삭제하고 다시 추가해 수정함 )
     @PostMapping("/api/save")
-    Map<String, Object> saveArticle(@RequestBody ArticleRequest articleRequest) {
+    ResponseEntity<Map<String, Object>> saveArticle(@RequestBody ArticleRequest articleRequest) {
         log.info("ArticleRequest : {}", articleRequest);
-
-        articleService.saveArticle(articleRequest);
-
         Map<String, Object> result = new HashMap<>();
-
-        result.put("result", "success");
-
-        return result;
+        try{
+            articleService.saveArticle(articleRequest);
+            result.put("result", "success");
+            return new ResponseEntity(result, HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            e.getLocalizedMessage();
+            result.put("result", "fali");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     // 게시글 삭제
-    // TODO : 유저 인증 정보를 입력해야함
+
     @GetMapping("/api/delete/{articleId}/{userId}")
     Map<String, Object> deleteArticle(@PathVariable String userId, @PathVariable Long articleId) {
         log.info("delete  userId : {}, articleId : {}", userId, articleId);
@@ -101,6 +108,29 @@ public class ArticleController {
 
         return result;
 
+    }
+
+    @GetMapping("/api/article-form/validation/{userId}")
+    ResponseEntity<Map<String, Object>> validation(@PathVariable String userId)
+    {
+        Map<String, Object> result = new HashMap<>();
+
+        String currentMemberId = securityUtil.getCurrentMemberId();
+
+        log.info("글쓰기 {} , {}", userId, currentMemberId);
+
+        if (userId.equals(currentMemberId))
+        {
+            log.info("성공");
+            result.put("result", "success");
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        else
+        {
+            log.info("실패");
+            result.put("result", "fail");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

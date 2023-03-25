@@ -31,3 +31,7 @@ spring:
       detection-strategy: annotated
   thymeleaf:
   thymeleaf3.decoupled-logic: true
+
+
+jwt:
+  secret: dqwpmodqwpmdpqmcpo212m3p21mpVQWDMpqdmqpwmocmoqdqwdq2

@@ -70,85 +70,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-<!--    &lt;!&ndash; Sidebar &ndash;&gt;-->
-<!--    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">-->
-
-<!--        &lt;!&ndash; Sidebar - Brand &ndash;&gt;-->
-<!--        <a class="sidebar-brand d-flex align-items-center justify-content-center"-->
-<!--           href="/index">-->
-<!--            <div class="sidebar-brand-icon rotate-n-15">-->
-<!--                <i class="fas fa-laugh-wink"></i>-->
-<!--            </div>-->
-<!--            <div class="sidebar-brand-text mx-3">JUPOJA</div>-->
-<!--        </a>-->
-
-<!--        &lt;!&ndash; Divider &ndash;&gt;-->
-<!--        <hr class="sidebar-divider my-0">-->
-
-<!--        &lt;!&ndash; Nav Item - Dashboard &ndash;&gt;-->
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link" href="/index">-->
-<!--                <i class="fas fa-fw fa-tachometer-alt"></i>-->
-<!--                <span>Main</span></a>-->
-<!--        </li>-->
-
-<!--        &lt;!&ndash; Divider &ndash;&gt;-->
-<!--        <hr class="sidebar-divider">-->
-
-<!--        &lt;!&ndash; Heading &ndash;&gt;-->
-<!--        <div class="sidebar-heading">-->
-<!--            Stock-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Nav Item - Pages Collapse Menu &ndash;&gt;-->
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"-->
-<!--               aria-expanded="true" aria-controls="collapseTwo">-->
-<!--                <i class="fas fa-fw fa-cog"></i>-->
-<!--                <span>Category</span>-->
-<!--            </a>-->
-<!--            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">-->
-<!--                <div class="bg-white py-2 collapse-inner rounded">-->
-<!--                    <h6 class="collapse-header">Stock Category:</h6>-->
-<!--                    <a class="collapse-item"-->
-<!--                       href="list?category=per">저평가</a>-->
-<!--                    <a class="collapse-item"-->
-<!--                       href="list?category=dividend">성장률</a>-->
-<!--                    <a class="collapse-item"-->
-<!--                       href="list?category=rate">배당금</a>-->
-<!--                    <a class="collapse-item"-->
-<!--                       href="list?category=score">안정성</a>-->
-<!--                    <a class="collapse-item"-->
-<!--                       href="list?category=std">고위험</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </li>-->
-
-
-<!--        &lt;!&ndash; Divider &ndash;&gt;-->
-<!--        <hr class="sidebar-divider">-->
-
-<!--        &lt;!&ndash; Heading &ndash;&gt;-->
-<!--        <div class="sidebar-heading">-->
-<!--            Result-->
-<!--        </div>-->
-
-
-<!--        &lt;!&ndash; Nav Item - Tables &ndash;&gt;-->
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link" href="portfolio">-->
-<!--                <i class="fas fa-fw fa-table"></i>-->
-<!--                <span>Portfolio</span></a>-->
-<!--        </li>-->
-<!--        &lt;!&ndash; Divider &ndash;&gt;-->
-<!--        <hr class="sidebar-divider d-none d-md-block">-->
-
-<!--        &lt;!&ndash; Sidebar Toggler (Sidebar) &ndash;&gt;-->
-<!--        <div class="text-center d-none d-md-inline">-->
-<!--            <button class="rounded-circle border-0" id="sidebarToggle"></button>-->
-<!--        </div>-->
-<!--    </ul>-->
-    <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -156,32 +77,14 @@
         <!-- Main Content -->
         <div id="content">
 
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
-                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-
-                <div class="eight">
-                    <h1>Stock Portfolio Advisory</h1>
-                </div>
-
-
-                <!--  Topbar Search
-
-                     <div class="input-group" >
-                     <p style="background: linear-gradient(to right, #A7A3FF,#FFA7A3, #671cc4, #5673bd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">주식 포트폴리오 자문</p>
-
-                     </div>-->
-
-
-            </nav>
-            <!-- End of Topbar -->
+            <div id="topbar"></div>
 
 
             <!-- Begin Page Content -->
             <div class="container">
-                <div id = "indexImgContainer " class = "text-center"style="object-fit: contain; float:none; margin:0 auto">
+                <div id="indexImgContainer " class="text-center" style="object-fit: contain; float:none; margin:0 auto">
                     <a id="indexImgClick" style="cursor: pointer;">
-                    <img src="/img/indexImg1.png" class="img-fluid" id= "indexImg" style="object-fit: contain;">
+                        <img src="/img/indexImg1.png" class="img-fluid" id="indexImg" style="object-fit: contain;">
                     </a>
                 </div>
 
@@ -250,6 +153,8 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/index.js"></script>
+<script src="/js/topbar.js"></script>
+
 </body>
 
 </html>

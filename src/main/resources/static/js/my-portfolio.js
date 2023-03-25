@@ -7,12 +7,12 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 let RequestStocks = []
 let ResponseStock = []
 let ResponseWeight = []
-
+let userId
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
-
-    loadMyPortfolio("minsang")
+    userId = localStorage.getItem("userId")
+    loadMyPortfolio(userId)
     console.log(ResponseStock)
     console.log(ResponseWeight)
 
@@ -22,7 +22,6 @@ $('#balanceBtn').click(function () {
     setBalance(Number($("#inputBalance").val()))
     $("#InputBalanceCard").css("display", "none")
     $("#outputBalanceCard").css("display", "block")
-
 
 })
 
@@ -39,14 +38,13 @@ $('#deleteBtn').click(function () {
     
 })
 
-// TODO : 유저 아이디를 추가해야한다.
 function deletePortFolio() {
     $.ajax({
         type: 'POST',
         url: '/api/myportfolio/delete',
         contentType: 'application/json',
         data: JSON.stringify({
-            'userId' : 'minsang'
+            'userId' : userId
         })
         ,
         success: function (response) {
@@ -77,7 +75,8 @@ function savePortfolio() {
         contentType: 'application/json',
         data: JSON.stringify({
             'stockList': ResponseStock,
-            "weights": ResponseWeight
+            "weights": ResponseWeight,
+            "user" : userId
         })
         ,
         success: function (response) {
@@ -95,11 +94,10 @@ function savePortfolio() {
 
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
-//TODO: get Url을 변경해야함
 function loadMyPortfolio(userId) {
     $.ajax({
         type: "GET",
-        url: "/api/myportfolio/?userId=minsang",
+        url: "/api/myportfolio/?userId="+userId,
         dataType: 'json',
         success: function (response) {
 

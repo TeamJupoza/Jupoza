@@ -5,6 +5,7 @@ import gachon.jupoza.domain.PortFolio;
 import gachon.jupoza.domain.Stock;
 import gachon.jupoza.domain.UserAccount;
 import gachon.jupoza.dto.PortFolioDto;
+import gachon.jupoza.dto.Request.PortfolioRequest;
 import gachon.jupoza.dto.StockDto;
 import gachon.jupoza.repository.MyStockRepository;
 import gachon.jupoza.repository.PortfolioRepository;
@@ -35,10 +36,9 @@ public class MyPortfolioService {
 
 
     // Portfolio Dto를 UserAccount 정보와 같이 엔티티화 해서 DB에 저장한다.
-    public void savePortfolio(PortFolioDto portFolioDto) {
-        UserAccount userAccount = userAccountRepository.getReferenceById(portFolioDto.getUserAccountDto().getUserId());
-
-
+    public void savePortfolio(PortfolioRequest portfolioRequest) {
+        UserAccount userAccount = userAccountRepository.getReferenceById(portfolioRequest.getUserId());
+        PortFolioDto portFolioDto = portfolioRequest.toDto(userAccount.toDto());
         // 포트폴리오 정보 저장
 
 

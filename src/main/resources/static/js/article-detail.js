@@ -10,12 +10,12 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 let ResponseArticle
 let ResponseStock = []
 let ResponseWeight = []
-
+let articleId
 
 
 // portfolio 접속시 화면 페이지 구성 함수 실행
 $(document).ready(function () {
-    let articleId = $('#articleIdHidden').val()
+    articleId = $('#articleIdHidden').val()
     loadMyPortfolio(articleId)
     console.log(ResponseStock)
     console.log(ResponseWeight)
@@ -41,51 +41,38 @@ $('#updateBtn').click(function () {
 $('#deleteBtn').click(function () {
     if ( confirm("정말로 게시글을 삭제 하겠습니까?"))
     {
-        deleteArticle()
+        deleteArticle(articleId, ResponseArticle.userAccount.userId)
         alert("게시글을 삭제했습니다.")
-        location.replace("/")
+        location.replace("/article")
     }
 })
 
-// TODO : 인증정보를 주어 내 아이디의 게시글일떄만 삭제버튼이 보이게 하야한다.
-function deleteArticle() {
 
-    
-}
+function deleteArticle(articleId, userId) {
+    // 내 아이디의 게시글일 떄만 보이게하기
 
-// 포트폴리오 정보를 서버에 보내 DB에 저장하는 함수
-function savePortfolio() {
-    console.log('savePortfolio')
-    console.log("RequestStock : " + ResponseStock[0])
-    for (let i = 0; i < 4; i++) {
-        delete ResponseStock[i].no
-    }
-
+    // 삭제
     $.ajax({
-        type: 'POST',
-        url: '/api/myportfolio/save',
+        type: 'GET',
+        url: '/article/api/delete/'+articleId+"/"+userId,
         contentType: 'application/json',
-        data: JSON.stringify({
-            'stockList': ResponseStock,
-            "weights": ResponseWeight
-        })
-        ,
         success: function (response) {
             if (response['result'] === 'success') {
-                alert("포트폴리오 등록에 성공했습니다.")
+                alert("게시글 삭제를 성공했습니다.")
                 location.replace("/")
             }
             else{
-                alert("포트폴리오 등록에 실패했습니다.")
+                alert("게시글 삭제에 실패했습니다.")
             }
         }
 
     })
+    
 }
 
 
 // 서버에서 포트폴리오 종목들의 정보(비중 + 종목 상세 정보)를 요청 하는 함수
-//TODO: get Url을 변경해야함
+
 function loadMyPortfolio(articleId) {
     $.ajax({
         type: "GET",
@@ -101,7 +88,6 @@ function loadMyPortfolio(articleId) {
                 ResponseStock = response.stockList
                 ResponseArticle = response.article
                 ResponseWeight = response.weights
-
                 setPortfolio(ResponseStock)
             }
 
@@ -116,6 +102,16 @@ function loadMyPortfolio(articleId) {
 
 }
 
+// 불러온 게시글이 내 게시글이면 삭제버튼을 활성화한다.
+function setDeleteBtn(userId) {
+    if (userId == localStorage.getItem("userId"))
+    {
+        $('#deleteBtn').css("display","block")
+    }
+
+
+}
+
 // 서버에서 받아온 포트폴리오 종목들의 정보를 이용해 포트폴리오 결과페이지를 꾸미는 함수
 function setPortfolio(response) {
     setPieChart()
@@ -123,6 +119,8 @@ function setPortfolio(response) {
     setWeightChart()
     setPortfolioCards()
     setArticle()
+    setDeleteBtn(ResponseArticle.userAccount.userId)
+
 }
 
 function setArticle() {
