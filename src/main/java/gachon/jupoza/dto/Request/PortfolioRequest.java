@@ -19,10 +19,12 @@ public class PortfolioRequest {
 
     float[] weights;
 
+    String userId;
 
-    public static PortfolioRequest of(List<Stock> stockList, float[] weights)
+
+    public static PortfolioRequest of(List<Stock> stockList, float[] weights, String userId)
     {
-        return new PortfolioRequest(stockList, weights);
+        return new PortfolioRequest(stockList, weights, userId);
     }
 
     public PortFolioDto toDto(UserAccountDto userAccountDto)

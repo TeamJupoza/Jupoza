@@ -46,6 +46,13 @@ function savePortfolio() {
     for (let i = 0; i < 4; i++) {
         delete ResponseStock[i].no
     }
+    let userId = localStorage.getItem("userId")
+    if (userId == "" || userId == null)
+    {
+        alert("로그인을 해주세요.")
+        return
+
+    }
 
     $.ajax({
         type: 'POST',
@@ -53,7 +60,8 @@ function savePortfolio() {
         contentType: 'application/json',
         data: JSON.stringify({
             'stockList': ResponseStock,
-            "weights": ResponseWeight
+            "weights": ResponseWeight,
+            "userId" : userId
         })
         ,
         success: function (response) {

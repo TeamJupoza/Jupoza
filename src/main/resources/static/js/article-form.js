@@ -9,8 +9,8 @@ $('#register-btn').click(function () {
     let content = $('#article-text').val()
     console.log(title)
     console.log(content)
-    // TODO: 유저  인증 정보를 넣어줘야한다.
-    let userId = "minsang"
+
+    let userId = localStorage.getItem("userId")
     saveArticle(title,content,userId)
 
 })
@@ -30,7 +30,7 @@ function saveArticle(title, content, userId) {
         success: function (response) {
             if (response['result'] === 'success') {
                 alert("글 등록에 성공했습니다.")
-                location.replace("/")
+                location.replace("/article")
             }
             else{
                 alert("포트폴리오 등록에 실패했습니다.")

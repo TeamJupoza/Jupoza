@@ -1,6 +1,7 @@
 package gachon.jupoza.domain;
 
 
+import gachon.jupoza.dto.UserAccountDto;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -76,6 +77,12 @@ public class UserAccount extends AuditingFields implements UserDetails {
     }
     public static UserAccount of(String user_id, String user_password, String email, String nickName, List<String> roles) {
         return new UserAccount(user_id, user_password, email, nickName, roles);
+    }
+
+    public UserAccountDto toDto()
+    {
+        return UserAccountDto.of(this.userId, this.getUserPassword(), this.getEmail(), this.getNickName(), this.getCreatedAt(), this.getCreatedBy()
+        ,this.getModifiedAt(), this.getModifiedBy());
     }
 
 

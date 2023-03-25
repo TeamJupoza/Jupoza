@@ -5,8 +5,7 @@ src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.
 
 
 
-let userId
-let token
+
 
 $(document).ready(function () {
     setTopBar()
@@ -15,8 +14,8 @@ $(document).ready(function () {
 
 function setTopBar() {
 
-    userId = localStorage.getItem("userId")
-    token = localStorage.getItem("accessToken")
+    let userId = localStorage.getItem("userId")
+    let token = localStorage.getItem("accessToken")
 
     if((userId != "") && (token != "") )
     {

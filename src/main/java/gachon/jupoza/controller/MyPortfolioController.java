@@ -33,19 +33,11 @@ public class MyPortfolioController {
     // 내 DB에 포트폴리오 정보를 저장
     @PostMapping("/save")
     public Map<String,Object> SavePortFolio( @RequestBody PortfolioRequest portfolioRequest) throws IOException {
-        System.out.println(portfolioRequest.getClass().getName());
 
-        log.info("portfolioRequest : {}",portfolioRequest.toString());
-
-        //TODO: 사용자 인증 정보를 만들어야함
-        UserAccountDto userAccountDto = UserAccountDto.of("minsang","minsang","minsang@naver.com","GangHal");
-        PortFolioDto portFolioDto = portfolioRequest.toDto(userAccountDto);
-
-        myPortfolioService.savePortfolio(portFolioDto);
+        myPortfolioService.savePortfolio(portfolioRequest);
 
         Map<String,Object> result = new HashMap<>();
         result.put("result","success");
-
         return result;
 
     }
@@ -87,6 +79,7 @@ public class MyPortfolioController {
 
 
     // 내 포트폴리오 정보 수정
+    // TODO: 인증 정보 수정
     @PostMapping("/update")
     public Map<String,Object> GetMyPortFolio( @RequestBody PortfolioRequest portfolioRequest) throws JsonProcessingException {
 
@@ -119,8 +112,6 @@ public class MyPortfolioController {
         return result;
 
     }
-
-    //TODO: 내 아이디로 접속시 인증을 추가해줘야한다.
     @GetMapping("")
     public Map<String,Object> MyPortFolio(@RequestParam String userId)
     {
