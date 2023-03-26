@@ -32,17 +32,13 @@
 ### 1. 프로젝트 불러오기
 
 ```sh
-# 1. 자바 서버 
-git clone https://github.com/devMs94/Jupoza.git
-
-# 2. 파이썬 서버 
-git clonehttps://github.com/devMs94/Jupoza_python.git
+git clone https://github.com/TeamJupoza/Jupoza.git
 ```
 
-### 2. /main/resource 에 application.properties 파일 생성후 환경값 입력 (DB 연결 설정)
+### 2. /main/resource 에 application.yaml 파일 생성후 환경값 입력 (DB 연결 설정)
 
 ```sh
-# 해당 내용을 application.yml 에 입력해 주세요.
+# 해당 내용을 application.yaml 에 입력해 주세요.
 
 spring:
   datasource:
@@ -143,3 +139,14 @@ create table stock
   * 현재 정적인 데이터를 API를 활용해 동적으로 변경해서 최신정보 반영 
 * 코드 리팩토링
   * 비효울적인 코드들을 리팩토링해 효율적이고 가독성 있게 변경 
+  
+  
+  # 프토젝트 1차 고도화 완료
+  
+  * 프로젝트 유즈케이스, ERD 문서작성
+  * 내 포트폴리고 정보 구현 완료 
+  포트폴리오 종목 5개를 선택하고 DB에 내 포트폴리오를 저장 수정 삭제 출력이 가능함
+  * 포트폴리오 공유 게시판 구현완료
+  내 포트폴리오를 소개할 수 있도록 포트폴리오 공유 게시판을 구현함
+  * 회원기능 구현 완료
+  내 포트폴리오 관리, 포트폴리오 공유 게시판을 관리 할 수 있도록 회원기능 구현 완료 
