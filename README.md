@@ -113,8 +113,40 @@ create table stock
    - https://github.com/devMs94/Jupoza_python
 2. Jupoza_App
    - https://github.com/kkkmj/jupoja
+   
+# 개발 환경
+* Java 11
+* Intellij IDEA Ultimate 2022.2.2
+* Gradle 7.5.1
+* Spring Boot 2.7.5
+* Python 3.9
 
 
+# 기술 세부 스택 
+* Spring Boot
+  * Spring Web
+  * Srping Data Jpa
+  * Thymleaf
+  * Spring Security
+  * MySQL Driver
+  * Lombok
+  * Spring Boot DevTools
+  * Jwt
+  
+* Python
+  * Flask
+  * numpy
+  * pandas
+  * scipy
+
+
+* JavaScript
+  * Bootstrap 4
+  * Jquery
+  * datatables
+  * chartJs
+  * Ajax
+    
 # Team
 가천대학교 컴퓨터공학과 
 - 유민상 : 웹사이트 개발 
