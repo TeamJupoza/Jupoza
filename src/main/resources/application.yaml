@@ -7,7 +7,8 @@ logging:
     com.fastcampus.projectboard: debug
     org.springframework.web.servlet: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
-
+    
+# 실제 서비스에서는 노출되어서는 안된다.
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/jupoza
@@ -32,6 +33,6 @@ spring:
   thymeleaf:
   thymeleaf3.decoupled-logic: true
 
-
+# 실제 서비스에서는 노출되어서는 안된다.
 jwt:
   secret: dqwpmodqwpmdpqmcpo212m3p21mpVQWDMpqdmqpwmocmoqdqwdq2
