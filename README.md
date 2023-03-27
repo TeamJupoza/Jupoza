@@ -138,6 +138,7 @@ create table stock
   * numpy
   * pandas
   * scipy
+  * openpyxl
 
 
 * JavaScript
