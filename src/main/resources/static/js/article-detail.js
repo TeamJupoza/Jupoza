@@ -59,7 +59,7 @@ function deleteArticle(articleId, userId) {
         success: function (response) {
             if (response['result'] === 'success') {
                 alert("게시글 삭제를 성공했습니다.")
-                location.replace("/")
+                location.replace("/category")
             }
             else{
                 alert("게시글 삭제에 실패했습니다.")
@@ -93,7 +93,7 @@ function loadMyPortfolio(articleId) {
 
             else{
                 alert("내 포트폴리오가 존재하지않습니다.")
-                location.replace("/")
+                location.replace("/category")
             }
 
 
