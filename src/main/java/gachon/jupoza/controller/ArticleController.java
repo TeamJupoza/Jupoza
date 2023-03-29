@@ -32,8 +32,15 @@ public class ArticleController {
     // 게시글 등록,수정 ( 게시글이 존재하면 게시글을 삭제하고 다시 추가해 수정함 )
     @PostMapping("/api/save")
     ResponseEntity<Map<String, Object>> saveArticle(@RequestBody ArticleRequest articleRequest) {
-        log.info("ArticleRequest : {}", articleRequest);
         Map<String, Object> result = new HashMap<>();
+
+
+        log.info("ArticleRequest : {}", articleRequest);
+        if (articleRequest.getArticleStockList().isEmpty() || articleRequest.getTitle().isEmpty() || articleRequest.getContent().isEmpty())
+        {
+            result.put("result,","fail");
+            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+        }
         try{
             articleService.saveArticle(articleRequest);
             result.put("result", "success");
