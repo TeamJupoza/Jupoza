@@ -6,11 +6,21 @@
 ## 데모페이지
 * http://64.110.84.9:8080/
 
-## Description
+## 프로젝트 설명 
 - 투자자의 입장에서 각 개인의 스타일에 맞게 투자할 수 있도록 투자 설계에 도움을 주고자 한다.
 - 주식 종목들의 기술적 분석을 통해 투자자에게 기업의 성향을 키워드별로 카테고리를 구분하여 제안한다. 
 - 사용자들에게 포트폴리오 구성과 종목에 비중을 선택할 때에 도움을 준다. 
 - 포트폴리오 구성에 어려움을 느끼거나 효과적으로 구성하려는 투자자들을 대상으로 서비스 제공한다.
+
+## 주요 기능 
+- 포트폴리오 구성에 도움을 주는 서비스 
+  - 사용자에게 성향에 포트폴리오를 구성할 수 있도록 카테고리별로 주식을 선택할 수 있습니다.
+  - RiskParity 자산배분 모형을 이용해 사용자는 가장 최적의 포트폴리오 비중을 제안 받습니다.
+  - 사용자는 포트폴리오에 대한 시각화된 정보를 제공 받습니다.
+- 내 포트폴리오 관리 기능 
+  - 사용자는 내 포트폴리오를 등록할수 있고 수정, 삭제를 할 수 있습니다.
+- 포트폴리오 공유 게시판 기능
+  - 사용자들 끼리 포트폴리오를 공유할 수 있습니다. 
 
 ### 1) 카테고리별 기준
 - 저평가     - 시장에서 비교적 저평가되어 있는 기업들을 PER, ROE 를 기준으로 검색합니다.
@@ -26,13 +36,24 @@
 - 기대수익률 예측 오차를 피할 수 있으며, 시가총액 가중방식에서 나타나는 편중현상에서 벗어날 수 있음.
 - 수익률보단 안정성에 집중해서 초보 투자자에게 적합한 안정적인 투자 방법
 
-# Environment
+# 프로젝트 구조 
 ![](document/img/img2.jpeg)
-* 자바 서버 - 스프링부트를 이용한 WAS 
-* DB 파이썬에서 전처리한 데이터를 저장 
-* Flask 자바서버에서 포트폴리오 비중을 요청 하면 RiskParity 모델을 사용해 비중 반환
+* Spring Boot Server - 스프링 부트를 이용해 웹 서버 역할은 한다. 
+* DB - 주식 데이터, 회원정보 데이터, 포트폴리오 데이터, 게시판 데이터를 관리한다.
+* Flask Server - 주식 데이터를 전처리 하고 스프링 부트 서버에서 포트폴리오 비중을 구하는 요청이 들어오면 RiskParity 모델을 사용해 비중을 반환한다.
 
-## Installation
+
+## 데이터베이스 Erd
+![](document/img/jupoza-erd.jpg)
+
+## 유즈 케이스 
+![](document/img/jupoza-Usecase.jpg)
+
+## API 명세서 
+
+
+
+## 설치
 
 ### 1. 프로젝트 불러오기
 
@@ -64,43 +85,19 @@ spring:
 ```sh
 CREATE DATABASE jupoza;
 ```
-#### 2. Jupoza Table 생성
 
-- subscribe Table 생성
-```sh
-create table stock
-(
-    stockid  int(6) unsigned zerofill not null
-        primary key,
-    name     varchar(150)             not null,
-    price    int                      not null,
-    per      float                    not null,
-    roe      float                    not null,
-    net      float                    not null,
-    sale     float                    not null,
-    dividend float                    not null,
-    bis      float                    not null,
-    current  float                    not null,
-    quick    float                    not null,
-    debt     float                    not null,
-    score    float                    not null,
-    std      float                    null,
-    rate     float                    not null,
-    img      text                     null
-);
-```
-### 3. 데이터 전러치  
+### 2. 데이터 전러치  
 * document 폴더의 JupozaDataPreProcessing.ipynb 프로그램을 이용해 재무주가 데이터를 전처리
-* 전처리된 데이터를 stock 테이블에 삽입 
+* 전처리된 데이터를 stock 테이블에 삽입해야한다.
 * sampleStock.sql 참조(2022.11월 기준 샘플자료)
 
-### 4. Gradle Build
+### 3. Gradle Build
 ```sh
  # /Jupoza 디렉터리에서 명령어 실행 
  ./gradlew build
  ```
 
-### 5. Jar 파일 실행
+### 4. Jar 파일 실행
 ```sh
  # ~/Jupoza/build/libs 디렉터리에서 Jar 파일 실행
  java -jar ["빌드된 jar 파일"] 
@@ -110,7 +107,6 @@ create table stock
 # /Jupoza_python
  python3 app.py 
 ```
-
 
 # 관련 링크
 
