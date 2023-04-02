@@ -100,7 +100,7 @@ CREATE DATABASE jupoza;
 ### 4. Jar 파일 실행
 ```sh
  # ~/Jupoza/build/libs 디렉터리에서 Jar 파일 실행
- java -jar ["빌드된 jar 파일"] 
+ java -jar -Dspring.profiles.active='profile' ["빌드된 jar 파일"] 
 ```
 ### 6. Jupoza_python 실행
 ```sh
