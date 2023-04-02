@@ -78,15 +78,15 @@ $(document).ready(function () {
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Stock Category:</h6>
                                 <a class="collapse-item"
-                                   href="list?category=per">저평가</a>
+                                   href="/list?category=per">저평가</a>
                                 <a class="collapse-item"
-                                   href="list?category=dividend">성장률</a>
+                                   href="/list?category=dividend">성장률</a>
                                 <a class="collapse-item"
-                                   href="list?category=rate">배당금</a>
+                                   href="/list?category=rate">배당금</a>
                                 <a class="collapse-item"
-                                   href="list?category=score">안정성</a>
+                                   href="/list?category=score">안정성</a>
                                 <a class="collapse-item"
-                                   href="list?category=std">고위험</a>
+                                   href="/list?category=std">고위험</a>
                             </div>
                         </div>
                     </li>
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
                         <!-- Nav Item - Tables -->
                         <li class="nav-item">
-                            <a class="nav-link" href="portfolio">
+                            <a class="nav-link" href="/portfolio">
                                 <i class="fas fa-fw fa-table"></i>
                                 <span>Portfolio</span></a>
                         </li>
@@ -112,7 +112,7 @@ $(document).ready(function () {
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="article">
+                            <a class="nav-link" href="/article">
                                 <i class="fas fa-fw fa-table"></i>
                                 <span>포트폴리오 공유 게시판</span></a>
                         </li>
