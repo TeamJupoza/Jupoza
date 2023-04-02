@@ -20,7 +20,7 @@ $('#loginBtn').click(function () {
             localStorage.setItem("accessToken","Bearer " + response['accessToken']);
             localStorage.setItem("userId", $("#userId").val())
             alert("로그인에 성공했습니다.")
-            location.replace("/")
+            location.replace("/category")
         },
         error: function (response) {
             console.log(response)

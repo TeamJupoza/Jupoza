@@ -24,7 +24,7 @@ $('#registerBtn').click(function () {
 
             if (response['result'] === 'success') {
                 alert("회원가입에 성공했습니다.")
-                location.replace("/")
+                location.replace("/category")
             }
             else{
                 alert("회원가입에 실패했습니다.")

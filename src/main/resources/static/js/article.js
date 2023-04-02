@@ -21,6 +21,8 @@ function setTable() {
 
     dataTable = $('#dataTable').DataTable({
         responsive: true,
+        order: [[0, 'desc']],
+        ordering: true,
         "ajax":
             {
                 "url": "/article/api/get-all-articles",
