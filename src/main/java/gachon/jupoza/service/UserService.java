@@ -53,6 +53,8 @@ public class UserService {
                         userRegisterRequestDto.getUserNickname(),
                         List.of("USER")
                 );
+        userAccount.setCreatedBy(userAccount.getUserId());
+        userAccount.setModifiedBy(userAccount.getUserId());
 
 
         userAccountRepository.save(userAccount);

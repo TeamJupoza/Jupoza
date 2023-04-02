@@ -3,9 +3,12 @@ package gachon.jupoza.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
+import gachon.jupoza.domain.ArticleStock;
+import gachon.jupoza.domain.MyStock;
 import gachon.jupoza.dto.Request.ArticleRequest;
 import gachon.jupoza.dto.Response.ArticleResponse;
 import gachon.jupoza.service.ArticleService;
+import gachon.jupoza.service.MyPortfolioService;
 import gachon.jupoza.utils.securityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,27 +30,33 @@ public class ArticleController {
 
 
     private final ArticleService articleService;
+    private final MyPortfolioService myPortfolioService;
 
 
     // 게시글 등록,수정 ( 게시글이 존재하면 게시글을 삭제하고 다시 추가해 수정함 )
+    @Transactional
     @PostMapping("/api/save")
     ResponseEntity<Map<String, Object>> saveArticle(@RequestBody ArticleRequest articleRequest) {
         Map<String, Object> result = new HashMap<>();
 
 
         log.info("ArticleRequest : {}", articleRequest);
-        if (articleRequest.getArticleStockList().isEmpty() || articleRequest.getTitle().isEmpty() || articleRequest.getContent().isEmpty())
-        {
-            result.put("result,","fail");
+        // 요청 된 Request 에서 제목과 콘텐츠가 Null 인지 체크
+        if (articleRequest.getTitle().isEmpty() || articleRequest.getContent().isEmpty()) {
+            result.put("result,", "fail");
             return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
         }
-        try{
-            articleService.saveArticle(articleRequest);
-            result.put("result", "success");
-            return new ResponseEntity(result, HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
+
+        try {
+            if (articleService.saveArticle(articleRequest)) {
+                result.put("result", "success");
+                return new ResponseEntity(result, HttpStatus.OK);
+            }
+            else{
+                result.put("result", "fali");
+                return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
             e.getLocalizedMessage();
             result.put("result", "fali");
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
@@ -75,11 +84,11 @@ public class ArticleController {
     @Transactional
     @GetMapping("/api/{articleId}")
     public Map<String, Object> findOneArticle(@PathVariable Long articleId) throws JsonProcessingException {
-        log.info("article articleId : {}",articleId);
+        log.info("article articleId : {}", articleId);
 
-        Map<String,Object> result =articleService.findOneArticle(articleId);
+        Map<String, Object> result = articleService.findOneArticle(articleId);
 
-        log.info("article result : {}",result);
+        log.info("article result : {}", result);
 
         result.put("result", "success");
 
@@ -118,22 +127,19 @@ public class ArticleController {
     }
 
     @GetMapping("/api/article-form/validation/{userId}")
-    ResponseEntity<Map<String, Object>> validation(@PathVariable String userId)
-    {
+    ResponseEntity<Map<String, Object>> validation(@PathVariable String userId) {
         Map<String, Object> result = new HashMap<>();
 
         String currentMemberId = securityUtil.getCurrentMemberId();
 
         log.info("글쓰기 {} , {}", userId, currentMemberId);
 
-        if (userId.equals(currentMemberId))
-        {
+        // 로그인이 될 경우 글쓰기 버튼 생성
+        if (userId.equals(currentMemberId)) {
             log.info("성공");
             result.put("result", "success");
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-        else
-        {
+        } else {
             log.info("실패");
             result.put("result", "fail");
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);

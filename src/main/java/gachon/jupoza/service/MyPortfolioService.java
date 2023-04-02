@@ -50,6 +50,8 @@ public class MyPortfolioService {
                 portFolio.getMyStockList().get(i).setPortFolio(portFolio);
                 portFolio.getMyStockList().get(i).setUserId(portFolioDto.getUserAccountDto().getUserId());
             }
+            portFolio.setCreatedBy(portFolio.getUserAccount().getUserId());
+            portFolio.setModifiedBy(portFolio.getUserAccount().getUserId());
 
             portfolioRepository.save(portFolio);
             log.info(" savePortfolio 1. 해당 아이디의 포트폴리오 정보가 없으면 그냥 저장");
@@ -108,6 +110,8 @@ public class MyPortfolioService {
                         updatedPortFolio.getMyStockList().get(i).setPortFolio(updatedPortFolio);
                         updatedPortFolio.getMyStockList().get(i).setUserId(portFolioDto.getUserAccountDto().getUserId());
                     }
+                    updatedPortFolio.setCreatedBy(updatedPortFolio.getUserAccount().getUserId());
+                    updatedPortFolio.setModifiedBy(updatedPortFolio.getUserAccount().getUserId());
 
                     // 수정할 엔티티를 테이블에 저장한다.
                     portfolioRepository.save(updatedPortFolio);
