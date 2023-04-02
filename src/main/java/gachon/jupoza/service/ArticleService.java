@@ -31,7 +31,7 @@ public class ArticleService {
 
     private final StockRepository stockRepository;
 
-    public void saveArticle(ArticleRequest articleRequest) {
+    public boolean saveArticle(ArticleRequest articleRequest) {
         // 유저 정보 DB에서 조회
         UserAccount userAccount = userAccountRepository.findByUserId(articleRequest.getUserId()).get();
         ArticleDto articleDto = articleRequest.toDto();
@@ -42,15 +42,29 @@ public class ArticleService {
 
         List<MyStock> myStockList = myStockRepository.findAllByUserId(userAccount.getUserId());
 
-        for (MyStock myStock : myStockList) {
-            articleStockList.add(ArticleStock.of(article, myStock.getStockId(), myStock.getWeight(), myStock.getUserId()));
+        log.info("myStockList : {} ", myStockList);
+
+        if (myStockList.isEmpty())
+        {
+            return false;
         }
-        article.setMyStockList(articleStockList);
+        else{
+            for (MyStock myStock : myStockList) {
+                articleStockList.add(ArticleStock.of(article, myStock.getStockId(), myStock.getWeight(), myStock.getUserId()));
+            }
+            article.setMyStockList(articleStockList);
+
+            article.setCreatedBy(article.getUserAccount().getUserId());
+            article.setModifiedBy(article.getUserAccount().getUserId());
 
 
-        log.info("article : {} ", article);
+            log.info("article : {} ", article);
 
-        articleRepository.save(article);
+            articleRepository.save(article);
+
+            return true;
+        }
+
 
 
     }
@@ -82,15 +96,13 @@ public class ArticleService {
 
             // 수정될 article 을 먼저 삭제
 
-            // article 과 articleStockList 의 연관관계를 끊고 삭제함
-//            for (ArticleStock articleStock : article.get().getMyStockList())
-//            {
-//                articleStock.setArticle(null);
-//            }
-//            article.get().setMyStockList(null);
 
             articleStockRepository.deleteByArticleId(article.get().getId());
             articleRepository.deleteById(article.get().getId());
+
+            updatingArticle.setCreatedBy(updatingArticle.getUserAccount().getUserId());
+            updatingArticle.setModifiedBy(updatingArticle.getUserAccount().getUserId());
+
 
             // 수정된 article을 DB에 저장한다.
             articleRepository.save(updatingArticle);
