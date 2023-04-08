@@ -90,6 +90,29 @@ CREATE DATABASE jupoza;
 * document 폴더의 JupozaDataPreProcessing.ipynb 프로그램을 이용해 재무주가 데이터를 전처리
 * 전처리된 데이터를 stock 테이블에 삽입해야한다.
 * sampleStock.sql 참조(2022.11월 기준 샘플자료)
+```sh
+ # Jupoza DB에 stock 테이블 추가 
+ CREATE TABLE `stock` (
+  `stockid` int NOT NULL,
+  `bis` float NOT NULL,
+  `current` float NOT NULL,
+  `debt` float NOT NULL,
+  `dividend` float NOT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `net` float NOT NULL,
+  `per` float NOT NULL,
+  `price` int NOT NULL,
+  `quick` float NOT NULL,
+  `rate` float NOT NULL,
+  `roe` float NOT NULL,
+  `sale` float NOT NULL,
+  `score` float NOT NULL,
+  `std` float NOT NULL,
+  PRIMARY KEY (`stockid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+ ```
+
 
 ### 3. Gradle Build
 ```sh
@@ -100,7 +123,7 @@ CREATE DATABASE jupoza;
 ### 4. Jar 파일 실행
 ```sh
  # ~/Jupoza/build/libs 디렉터리에서 Jar 파일 실행
- java -jar -Dspring.profiles.active='profile' ["빌드된 jar 파일"] 
+ java -jar --spring.profiles.active=deploy ["빌드된 jar 파일"] 
 ```
 ### 6. Jupoza_python 실행
 ```sh
