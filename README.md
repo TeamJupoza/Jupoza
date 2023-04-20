@@ -170,6 +170,9 @@ CREATE DATABASE jupoza;
   * datatables
   * chartJs
   * Ajax
+  
+  
+ * MySQL
     
 # Team
 가천대학교 컴퓨터공학과 
